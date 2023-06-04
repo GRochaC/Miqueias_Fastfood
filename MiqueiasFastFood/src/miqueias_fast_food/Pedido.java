@@ -51,10 +51,7 @@ public class Pedido {
         System.out.println("Item não encontrado");
     }
     
-    public void getItensPedidos() {
-        for(ItemPedido ip : itensPedidos) {
-            System.out.printf("x%d %s : %.2fR$\n", ip.getQuantidade(), ip.getItem(),
-                    ip.getSubtotal());
-        }
+    public ArrayList<ItemPedido> getItensPedidos() {
+        return itensPedidos;
     }
 }
