@@ -1,4 +1,4 @@
-package MiqueiasFastFood;
+package miqueias_fast_food;
 
 /**
  *
@@ -8,6 +8,12 @@ public class Administrador extends Pessoa {
     private String login;
     private String senha;
 
+    public Administrador(String login, String senha, String cpf, String nome) {
+        super(cpf, nome);
+        this.login = login;
+        this.senha = senha;
+    }
+    
     public String getLogin() {
         return login;
     }
