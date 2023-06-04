@@ -11,10 +11,10 @@ public class Item {
     private double preco;
     private boolean disponivel;
     private final float[] valoresNutricionais;
-    private String tipo;
+    private final TiposComida tipo;
     private String descricao;
-    // private Estoque estoque;
     
+    /*
     public Item(String nome, double preco) {
         this.nome = nome;
         this.preco = preco;
@@ -22,16 +22,17 @@ public class Item {
     }
     
     public Item(String nome, double preco, float[] valoresNutricionais,
-            String tipo) {
+            TiposComida tipo) {
         this.nome = nome;
         this.preco = preco;
         this.valoresNutricionais = new float[4];
         System.arraycopy(valoresNutricionais, 0, this.valoresNutricionais, 0, 3);
         this.tipo = tipo;
     }
-    
+    */
+
     public Item(String nome, double preco, float[] valoresNutricionais,
-            String tipo, String descricao) {
+            TiposComida tipo, String descricao) {
         this.nome = nome;
         this.preco = preco;
         this.valoresNutricionais = new float[4];
@@ -73,11 +74,17 @@ public class Item {
     }
 
     public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+        switch(tipo) {
+            case SANDUICHE:
+                return "Sanduíche";
+            case CACHORRO_QUENTE:
+                return "Cachorro-quente";
+            case BEBIDA:
+                return "Bebida";
+            case SOBREMESA:
+                return "Sobremesa";
+        }
+        return null;
     }
 
     public String getDescricao() {
