@@ -5,20 +5,20 @@ import java.time.LocalDate;
 import java.io.*;
 
 public class HistoricoDePedidos{
-    private LocalDate data;
-    private ArrayList<Pedido> pedidos;
-    final String diretorioHistorico = "historico.txt";
-    final String diretorioRelatorio = LocalDate.now() + ".txt";
+    static private LocalDate data;
+    static private ArrayList<Pedido> pedidos;
+    static final String DIRETORIO_HISTORICO = "historico.txt";
+    static final String DIRETORIO_RELATORIO = LocalDate.now() + ".txt";
 
-    public void adicionarPedido(Pedido pedido){
-        this.pedidos.add(pedido);
+    public static void adicionarPedido(Pedido pedido){
+        pedidos.add(pedido);
     }
 
     // Adiciona ao arquivo linhas para cada um dos pedidos
-    public void gerarArquivo(){
+    public static void gerarArquivo(){
         try {
             data = LocalDate.now();
-            BufferedWriter escritor = new BufferedWriter(new FileWriter(this.diretorioHistorico));
+            BufferedWriter escritor = new BufferedWriter(new FileWriter(DIRETORIO_HISTORICO));
             for(Pedido pedido : pedidos){
                 escritor.write(data + ": R$" + pedido.getTotal());
                 escritor.newLine();
@@ -30,9 +30,9 @@ public class HistoricoDePedidos{
     }
 
     // Cria um arquivo relatório com o nome sendo data atual
-    public void gerarRelatorio(){
+    public static void gerarRelatorio(){
         try {
-            FileWriter escritor = new FileWriter(diretorioRelatorio);
+            FileWriter escritor = new FileWriter(DIRETORIO_RELATORIO);
             int indiceDoPedido = 0;
             for(Pedido pedido : pedidos){
                 ArrayList<ItemPedido> itensPedidos = pedido.getItensPedidos();
