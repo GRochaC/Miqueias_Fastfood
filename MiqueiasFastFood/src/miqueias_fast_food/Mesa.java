@@ -1,4 +1,4 @@
-package projeto;
+package miqueias_fast_food;
 
 /*
  * Classe provisória para mesas:
