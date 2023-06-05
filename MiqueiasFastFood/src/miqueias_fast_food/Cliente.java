@@ -10,7 +10,24 @@ public class Cliente extends Pessoa{
     private String telefone;
     private Mesa mesa;
     private final Pedido pedido;
+    private TiposPagamento pagamento;
 
+    
+    public Cliente(boolean takeOut, String cpf, String nome) {
+        super(cpf, nome);
+        this.takeOut = takeOut;
+        this.pedido = new Pedido(this, 0, this.takeOut);
+        this.mesa = null;
+    }
+    
+    public Cliente(boolean takeOut, Mesa mesa, String cpf, String nome) {
+        super(cpf, nome);
+        this.takeOut = takeOut;
+        this.pedido = new Pedido(this, 0, this.takeOut);
+        this.mesa = mesa;
+    }
+    
+    /*
     public Cliente(boolean takeOut, String dataDeAniversario, String telefone, String cpf, String nome) {
         super(cpf, nome);
         this.takeOut = takeOut;
@@ -27,6 +44,20 @@ public class Cliente extends Pessoa{
         this.telefone = telefone;
         this.mesa = mesa;
         this.pedido = new Pedido(this, 0, this.takeOut);
+    }
+*/
+
+    public String getPagamento() {
+        switch(pagamento) {
+            case DINHEIRO: return "Dinheiro";
+            case CARTAO_DE_CREDITO: return "Cartão de crédito";
+            case PIX: return "Pix";
+        }
+        return null;
+    }
+
+    public void setPagamento(TiposPagamento pagamento) {
+        this.pagamento = pagamento;
     }
     
     public Pedido getPedido() {
