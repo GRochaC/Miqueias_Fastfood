@@ -17,12 +17,6 @@ public class MenuPedido extends javax.swing.JFrame {
         
         setLocationRelativeTo(null);
         
-        if(TelaCliente.takeOut) {
-            Cliente cliente = new Cliente(TelaCliente.takeOut, "", "", "", "");
-        } else {
-            // Cliente cliente = new Cliente(TelaCliente.takeOut, "", "", mesa, "", "");
-        }
-        
     }
 
     /**
@@ -37,6 +31,40 @@ public class MenuPedido extends javax.swing.JFrame {
         pnlMenuPedido = new javax.swing.JPanel();
         lbCabecalho = new javax.swing.JLabel();
         bVoltar = new javax.swing.JButton();
+        spMenu = new javax.swing.JScrollPane();
+        tbMenu = new javax.swing.JTable();
+        pnlPedido = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        lbTotal = new javax.swing.JLabel();
+        spPedido = new javax.swing.JScrollPane();
+        listaPedido = new javax.swing.JList<>();
+        lbValorTotal = new javax.swing.JLabel();
+        bRemover = new javax.swing.JButton();
+        bConfirmar = new javax.swing.JButton();
+        pnlItem = new javax.swing.JPanel();
+        lbNome = new javax.swing.JLabel();
+        lbTipo = new javax.swing.JLabel();
+        lbPreco = new javax.swing.JLabel();
+        lbDescricao = new javax.swing.JLabel();
+        lbNomeItem = new javax.swing.JLabel();
+        lbTipoItem = new javax.swing.JLabel();
+        lbPrecoItem = new javax.swing.JLabel();
+        lbDescricaoItem = new javax.swing.JLabel();
+        lbValoresNutricionais = new javax.swing.JLabel();
+        lbKcalItem = new javax.swing.JLabel();
+        lbGTItem = new javax.swing.JLabel();
+        lbCarbItem = new javax.swing.JLabel();
+        lbProtItem = new javax.swing.JLabel();
+        lbKCal = new javax.swing.JLabel();
+        lbGT = new javax.swing.JLabel();
+        lbCarb = new javax.swing.JLabel();
+        lbProt = new javax.swing.JLabel();
+        bInfo = new javax.swing.JButton();
+        lbQntItemPedido = new javax.swing.JLabel();
+        bRemv = new javax.swing.JButton();
+        bAdd = new javax.swing.JButton();
+        cbFiltro = new javax.swing.JComboBox<>();
+        lbFiltro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Miqueias Fast Food - Cardápio");
@@ -53,6 +81,276 @@ public class MenuPedido extends javax.swing.JFrame {
             }
         });
 
+        spMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Emoji", 3, 12))); // NOI18N
+
+        tbMenu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nome", "Tipo", "Preco"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tbMenu.setShowGrid(false);
+        spMenu.setViewportView(tbMenu);
+
+        pnlPedido.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seu pedido", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Emoji", 3, 12))); // NOI18N
+
+        lbTotal.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbTotal.setText("Total:");
+
+        listaPedido.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "..." };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        spPedido.setViewportView(listaPedido);
+
+        lbValorTotal.setText("...");
+
+        bRemover.setText("Remover");
+
+        bConfirmar.setText("Confirmar");
+        bConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bConfirmarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlPedidoLayout = new javax.swing.GroupLayout(pnlPedido);
+        pnlPedido.setLayout(pnlPedidoLayout);
+        pnlPedidoLayout.setHorizontalGroup(
+            pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
+            .addGroup(pnlPedidoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPedidoLayout.createSequentialGroup()
+                        .addComponent(spPedido)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bRemover))
+                    .addGroup(pnlPedidoLayout.createSequentialGroup()
+                        .addComponent(lbTotal)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbValorTotal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bConfirmar)))
+                .addContainerGap())
+        );
+        pnlPedidoLayout.setVerticalGroup(
+            pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPedidoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(pnlPedidoLayout.createSequentialGroup()
+                        .addGap(0, 96, Short.MAX_VALUE)
+                        .addComponent(bRemover)))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbTotal)
+                    .addComponent(lbValorTotal)
+                    .addComponent(bConfirmar))
+                .addGap(31, 31, 31))
+        );
+
+        pnlItem.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Item", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Emoji", 3, 12))); // NOI18N
+
+        lbNome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbNome.setText("Nome:");
+
+        lbTipo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbTipo.setText("Tipo:");
+
+        lbPreco.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbPreco.setText("Preço:");
+
+        lbDescricao.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbDescricao.setText("Descrição:");
+
+        lbNomeItem.setText("...");
+
+        lbTipoItem.setText("...");
+
+        lbPrecoItem.setText("...");
+
+        lbDescricaoItem.setText("...");
+
+        lbValoresNutricionais.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbValoresNutricionais.setText("Valores Nutricionais:");
+
+        lbKcalItem.setText("...");
+
+        lbGTItem.setText("...");
+
+        lbCarbItem.setText("...");
+
+        lbProtItem.setText("...");
+
+        lbKCal.setForeground(new java.awt.Color(102, 102, 102));
+        lbKCal.setText("Calorias");
+
+        lbGT.setForeground(new java.awt.Color(102, 102, 102));
+        lbGT.setText("Gordura Total");
+
+        lbCarb.setForeground(new java.awt.Color(102, 102, 102));
+        lbCarb.setText("Carboidratos");
+
+        lbProt.setForeground(new java.awt.Color(102, 102, 102));
+        lbProt.setText("Proteínas");
+
+        bInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/info.png"))); // NOI18N
+        bInfo.setText("info");
+        bInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bInfoActionPerformed(evt);
+            }
+        });
+
+        lbQntItemPedido.setText("...");
+
+        bRemv.setText("-");
+
+        bAdd.setText("+");
+        bAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAddActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlItemLayout = new javax.swing.GroupLayout(pnlItem);
+        pnlItem.setLayout(pnlItemLayout);
+        pnlItemLayout.setHorizontalGroup(
+            pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlItemLayout.createSequentialGroup()
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlItemLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlItemLayout.createSequentialGroup()
+                                .addComponent(lbNome)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbNomeItem))
+                            .addGroup(pnlItemLayout.createSequentialGroup()
+                                .addComponent(lbTipo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbTipoItem))
+                            .addGroup(pnlItemLayout.createSequentialGroup()
+                                .addComponent(lbPreco)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbPrecoItem))
+                            .addGroup(pnlItemLayout.createSequentialGroup()
+                                .addComponent(lbDescricao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbDescricaoItem))
+                            .addGroup(pnlItemLayout.createSequentialGroup()
+                                .addComponent(lbValoresNutricionais)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bInfo))))
+                    .addGroup(pnlItemLayout.createSequentialGroup()
+                        .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlItemLayout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbKCal)
+                                    .addGroup(pnlItemLayout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addComponent(lbKcalItem)))
+                                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlItemLayout.createSequentialGroup()
+                                        .addGap(37, 37, 37)
+                                        .addComponent(lbGT))
+                                    .addGroup(pnlItemLayout.createSequentialGroup()
+                                        .addGap(68, 68, 68)
+                                        .addComponent(lbGTItem)))
+                                .addGap(42, 42, 42))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlItemLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(bAdd)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbQntItemPedido)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bRemv)
+                            .addGroup(pnlItemLayout.createSequentialGroup()
+                                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbCarb)
+                                    .addGroup(pnlItemLayout.createSequentialGroup()
+                                        .addGap(28, 28, 28)
+                                        .addComponent(lbCarbItem)))
+                                .addGap(35, 35, 35)
+                                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbProt)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlItemLayout.createSequentialGroup()
+                                        .addComponent(lbProtItem)
+                                        .addGap(18, 18, 18)))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlItemLayout.setVerticalGroup(
+            pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlItemLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbNome)
+                    .addComponent(lbNomeItem))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbTipo)
+                    .addComponent(lbTipoItem))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPreco)
+                    .addComponent(lbPrecoItem))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbDescricao)
+                    .addComponent(lbDescricaoItem))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbValoresNutricionais)
+                    .addComponent(bInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbKcalItem)
+                    .addComponent(lbGTItem)
+                    .addComponent(lbCarbItem)
+                    .addComponent(lbProtItem))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbKCal)
+                    .addComponent(lbGT)
+                    .addComponent(lbCarb)
+                    .addComponent(lbProt))
+                .addGap(86, 86, 86)
+                .addGroup(pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbQntItemPedido)
+                    .addComponent(bRemv)
+                    .addComponent(bAdd))
+                .addGap(51, 51, 51))
+        );
+
+        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tudo", "Cachorros-quentes", "Sanduíches", "Bebidas", "Sobremesas" }));
+        cbFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFiltroActionPerformed(evt);
+            }
+        });
+
+        lbFiltro.setText("Filtro:");
+
         javax.swing.GroupLayout pnlMenuPedidoLayout = new javax.swing.GroupLayout(pnlMenuPedido);
         pnlMenuPedido.setLayout(pnlMenuPedidoLayout);
         pnlMenuPedidoLayout.setHorizontalGroup(
@@ -62,14 +360,42 @@ public class MenuPedido extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(pnlMenuPedidoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(bVoltar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlMenuPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlMenuPedidoLayout.createSequentialGroup()
+                        .addGroup(pnlMenuPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bVoltar)
+                            .addGroup(pnlMenuPedidoLayout.createSequentialGroup()
+                                .addComponent(lbFiltro)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlMenuPedidoLayout.createSequentialGroup()
+                        .addComponent(spMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlMenuPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlMenuPedidoLayout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(pnlPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(pnlItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         pnlMenuPedidoLayout.setVerticalGroup(
             pnlMenuPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMenuPedidoLayout.createSequentialGroup()
                 .addComponent(lbCabecalho)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 679, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlMenuPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbFiltro))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlMenuPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlMenuPedidoLayout.createSequentialGroup()
+                        .addComponent(pnlItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 17, Short.MAX_VALUE))
+                    .addComponent(spMenu))
+                .addGap(18, 18, 18)
                 .addComponent(bVoltar)
                 .addContainerGap())
         );
@@ -86,12 +412,31 @@ public class MenuPedido extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_bVoltarActionPerformed
+
+    private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbFiltroActionPerformed
+
+    private void bInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bInfoActionPerformed
+
+    private void bAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bAddActionPerformed
+
+    private void bConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmarActionPerformed
+        // TODO add your handling code here:
+        new ConfirmarPedido().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_bConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,8 +474,42 @@ public class MenuPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAdd;
+    private javax.swing.JButton bConfirmar;
+    private javax.swing.JButton bInfo;
+    private javax.swing.JButton bRemover;
+    private javax.swing.JButton bRemv;
     private javax.swing.JButton bVoltar;
+    private javax.swing.JComboBox<String> cbFiltro;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbCabecalho;
+    private javax.swing.JLabel lbCarb;
+    private javax.swing.JLabel lbCarbItem;
+    private javax.swing.JLabel lbDescricao;
+    private javax.swing.JLabel lbDescricaoItem;
+    private javax.swing.JLabel lbFiltro;
+    private javax.swing.JLabel lbGT;
+    private javax.swing.JLabel lbGTItem;
+    private javax.swing.JLabel lbKCal;
+    private javax.swing.JLabel lbKcalItem;
+    private javax.swing.JLabel lbNome;
+    private javax.swing.JLabel lbNomeItem;
+    private javax.swing.JLabel lbPreco;
+    private javax.swing.JLabel lbPrecoItem;
+    private javax.swing.JLabel lbProt;
+    private javax.swing.JLabel lbProtItem;
+    private javax.swing.JLabel lbQntItemPedido;
+    private javax.swing.JLabel lbTipo;
+    private javax.swing.JLabel lbTipoItem;
+    private javax.swing.JLabel lbTotal;
+    private javax.swing.JLabel lbValorTotal;
+    private javax.swing.JLabel lbValoresNutricionais;
+    private javax.swing.JList<String> listaPedido;
+    private javax.swing.JPanel pnlItem;
     private javax.swing.JPanel pnlMenuPedido;
+    private javax.swing.JPanel pnlPedido;
+    private javax.swing.JScrollPane spMenu;
+    private javax.swing.JScrollPane spPedido;
+    private javax.swing.JTable tbMenu;
     // End of variables declaration//GEN-END:variables
 }

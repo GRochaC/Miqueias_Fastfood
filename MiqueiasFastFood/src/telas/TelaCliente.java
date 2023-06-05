@@ -36,7 +36,6 @@ public class TelaCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Miqueias Fast Food - Bem-vindo");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo_cachorro_quente.png")).getImage());
-        setPreferredSize(new java.awt.Dimension(800, 799));
 
         pnlTelaCliente.setBackground(new java.awt.Color(244, 244, 244));
 
@@ -50,6 +49,7 @@ public class TelaCliente extends javax.swing.JFrame {
 
         bComerAqui.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cachorro_quente_e_refrigerante.png"))); // NOI18N
         bComerAqui.setText("Comer aqui");
+        bComerAqui.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         bComerAqui.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bComerAquiActionPerformed(evt);
@@ -58,6 +58,7 @@ public class TelaCliente extends javax.swing.JFrame {
 
         bParaViagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sacola.png"))); // NOI18N
         bParaViagem.setText("Para viagem");
+        bParaViagem.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         bParaViagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bParaViagemActionPerformed(evt);
@@ -90,7 +91,7 @@ public class TelaCliente extends javax.swing.JFrame {
             pnlTelaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTelaClienteLayout.createSequentialGroup()
                 .addComponent(lbCabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(lbBemVindo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbPerguntaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
