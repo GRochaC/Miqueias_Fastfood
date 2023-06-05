@@ -6,14 +6,14 @@ import java.io.*;
 public class Estoque{
     private static HashMap<String, Integer> ingredientes;
     private static HashMap<String, Integer> indiceDosIngredientes;
-    private final static String diretorioEstoque = "estoque.txt";
+    private final static String DIRETORIO_ESTOQUE = "estoque.txt";
     private static int numeroDeLinhas = 1;
 
 
     // Popula o HashMap com o conteúdo encontrado no arquivo local estoque.txt
     public static void atualizarEstoque(){
         try{
-            BufferedReader leitor = new BufferedReader(new FileReader(diretorioEstoque));
+            BufferedReader leitor = new BufferedReader(new FileReader(DIRETORIO_ESTOQUE));
             String linha;
             while((linha = leitor.readLine()) != null){
                 // Em cada linha do estoque se tem o nome de um ingrediente junto com sua quantidade
@@ -32,7 +32,7 @@ public class Estoque{
 
 
     // Método para se adicionar um item no estoque
-    public void adicionarItem(String nomeDoItem, int quantidadeDoItem){
+    public static void adicionarItem(String nomeDoItem, int quantidadeDoItem){
 
         // Não se pode utilizar esse método para editar itens
         if(ingredientes.containsKey(nomeDoItem))
@@ -43,7 +43,7 @@ public class Estoque{
 
             // Insere item no arquivo
             try {
-                BufferedWriter escritor = new BufferedWriter(new FileWriter(diretorioEstoque));
+                BufferedWriter escritor = new BufferedWriter(new FileWriter(DIRETORIO_ESTOQUE));
                 escritor.write(nomeDoItem + quantidadeDoItem);
                 escritor.newLine();
                 escritor.close();
@@ -54,10 +54,10 @@ public class Estoque{
     }
 
     // Método para editar a quantidade disponível de um item
-    public void editarItem(String nomeDoItem, int novaQuantidade){
+    public static void editarItem(String nomeDoItem, int novaQuantidade){
         try {
             // Leia o arquivo e guarde cada uma das linhas num array
-            File arquivo = new File(diretorioEstoque);
+            File arquivo = new File(DIRETORIO_ESTOQUE);
             BufferedReader leitor = new BufferedReader(new FileReader(arquivo));
             String[] linhas = new String[(int) arquivo.length()];
             String linha;
@@ -86,7 +86,7 @@ public class Estoque{
         try {
             // Leia o arquivo e guarde cada uma das linhas num array exceto o
             // índice da linha que queremos deletar
-            File arquivo = new File(diretorioEstoque);
+            File arquivo = new File(DIRETORIO_ESTOQUE);
             BufferedReader leitor = new BufferedReader(new FileReader(arquivo));
             String[] linhas = new String[(int) arquivo.length()];
             String linha;
@@ -114,13 +114,10 @@ public class Estoque{
     }
 
     // Mostra todos os ingredientes no estoque e sua exata quantidade
-    public void contagemItens(){
+    public static void contagemItens(){
         for(Map.Entry<String, Integer> ingrediente : ingredientes.entrySet()){
             System.out.printf("Há " + ingrediente.getValue() + "unidade(s) de " + ingrediente + "no estoque." );
         }
     }
 
-    public static void main(String[] args){
-        atualizarEstoque();
-    }
 }
