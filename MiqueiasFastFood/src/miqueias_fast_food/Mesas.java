@@ -2,6 +2,7 @@ package miqueias_fast_food;
 
 import java.util.*;
 
+// Classe que representa o salão de mesas do restaurante
 public class Mesas{
     private static ArrayList<ArrayList<Mesa>> mesas;   
     
@@ -40,18 +41,4 @@ public class Mesas{
         }
     }
     
-    /*
-    public static void main(String[] args){
-        mesas = new ArrayList<>();
-        int identificador = 0;
-        for(int i = 0; i < 4; ++i){
-              ArrayList<Mesa> fileira = new ArrayList<>();
-              for(int j = 0; j < 4; ++j){
-                    Mesa mesa = new Mesa(identificador, (byte) 2, true);
-                    fileira.add(mesa);
-                    ++identificador;
-              }
-        }         
-    }
-    */
 }
