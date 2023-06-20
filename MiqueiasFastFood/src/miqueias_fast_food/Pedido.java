@@ -14,7 +14,10 @@ public class Pedido {
     private boolean takeOut;
     
     // indica se o pedido tem desconto para as sobremesas caso seja aniversário do cliente no dia do pedido
-    private boolean desconto;
+    private boolean descontoSobremesa;
+
+    // indica se o pedido tem desconto caso o cliente deseja pagar como dinheiro
+    private boolean descontoDinheiro;
     
     // preço total do pedido
     private double total;
@@ -48,14 +51,24 @@ public class Pedido {
         this.takeOut = takeOut;
     }
 
-    // retorna se o pedido tem desconto
-    public boolean isDesconto() {
-        return desconto;
+    // retorna se o pedido tem desconto para sobremesas
+    public boolean isDescontoSobremesa() {
+        return descontoSobremesa;
     }
 
-    // define se o pedido tem ou não desconto
-    public void setDesconto(boolean desconto) {
-        this.desconto = desconto;
+    // define se o pedido tem ou não desconto para sobremesas
+    public void setDescontoSobremesa(boolean descontoSobremesa) {
+        this.descontoSobremesa = descontoSobremesa;
+    }
+
+    // retorna se o pedido tem desconto no pagamento em dinheiro
+    public boolean isDescontoDinheiro() {
+        return descontoDinheiro;
+    }
+
+    // define se o pedido tem ou não desconto no pagamento em dinheiro
+    public void serDescontoDinheiro(boolean descontoDinheiro) {
+        this.descontoDinheiro = descontoDinheiro;
     }
 
     // retorna o cliente vinculado com o pedido
@@ -103,7 +116,7 @@ public class Pedido {
             }
         }
         
-        // adicionar tratamento de erro aqui
+        // adicionar tratamento de erro aqui (?)
         
         return false;
     }
