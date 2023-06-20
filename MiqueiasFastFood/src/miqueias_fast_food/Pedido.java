@@ -67,7 +67,7 @@ public class Pedido {
     }
 
     // define se o pedido tem ou não desconto no pagamento em dinheiro
-    public void serDescontoDinheiro(boolean descontoDinheiro) {
+    public void setDescontoDinheiro(boolean descontoDinheiro) {
         this.descontoDinheiro = descontoDinheiro;
     }
 
