@@ -4,10 +4,7 @@ package miqueias_fast_food;
  * @author archago
  * Classe que representa o funcionário no sistema
  */
-
-// TROCAR O NOME DA CLASSE PARA FUNCIONARIO
-
-public class Administrador extends Pessoa {
+public class Funcionario extends Pessoa {
     // login do funcionário
     private String login;
     
@@ -15,7 +12,7 @@ public class Administrador extends Pessoa {
     private String senha;
 
     // Construtor da classe Funcionario
-    public Administrador(String login, String senha, String cpf, String nome) {
+    public Funcionario(String login, String senha, String cpf, String nome) {
         super(cpf, nome);
         this.login = login;
         this.senha = senha;
