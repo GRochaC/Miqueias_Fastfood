@@ -4,17 +4,30 @@
  */
 package telas;
 
+import miqueias_fast_food.*;
+
 /**
  *
  * @author Guilherme
  */
 public class ConfirmarPedido extends javax.swing.JFrame {
-
-    /**
-     * Creates new form ConfirmarPedido
-     */
+    static Cliente cliente;
+    static Pedido pedido;
+    
     public ConfirmarPedido() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
+    }
+    
+    public ConfirmarPedido(Cliente cliente, Pedido pedido) {
+        initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        ConfirmarPedido.cliente = cliente;
+        ConfirmarPedido.pedido = pedido;
     }
 
     /**
@@ -51,6 +64,7 @@ public class ConfirmarPedido extends javax.swing.JFrame {
         });
         spPedido.setViewportView(listaPedido);
 
+        pnlConfirmarPedido2.setBackground(new java.awt.Color(244, 244, 244));
         pnlConfirmarPedido2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         bCancelar.setText("Cancelar");
@@ -90,7 +104,7 @@ public class ConfirmarPedido extends javax.swing.JFrame {
                     .addComponent(bCancelar)
                     .addComponent(bEditar)
                     .addComponent(bPagar))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlConfirmarPedidoLayout = new javax.swing.GroupLayout(pnlConfirmarPedido);
@@ -112,10 +126,10 @@ public class ConfirmarPedido extends javax.swing.JFrame {
             .addGroup(pnlConfirmarPedidoLayout.createSequentialGroup()
                 .addComponent(lbCabecalho)
                 .addGap(56, 56, 56)
-                .addComponent(spPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                .addComponent(spPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlConfirmarPedido2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(101, 101, 101))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,7 +140,9 @@ public class ConfirmarPedido extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlConfirmarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlConfirmarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
@@ -136,11 +152,14 @@ public class ConfirmarPedido extends javax.swing.JFrame {
     private void bPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPagarActionPerformed
         // TODO add your handling code here:
         new Pagamento().setVisible(true);
+        Pagamento.cliente = cliente;
+        Pagamento.pedido = pedido;
         this.dispose();
     }//GEN-LAST:event_bPagarActionPerformed
 
     private void bEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditarActionPerformed
         // TODO add your handling code here:
+        new MenuPedido(cliente, pedido).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bEditarActionPerformed
 

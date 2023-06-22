@@ -4,17 +4,24 @@
  */
 package telas;
 
+import miqueias_fast_food.*;
+
 /**
  *
  * @author Guilherme
  */
 public class TelaCliente extends javax.swing.JFrame {
-    static boolean takeOut;
+    static Cliente cliente;
+    static int id_pedido = 1;
     /**
      * Creates new form TelaCliente
      */
     public TelaCliente() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        TelaCliente.cliente = new Cliente(false, "", "");
     }
 
     /**
@@ -70,7 +77,11 @@ public class TelaCliente extends javax.swing.JFrame {
         pnlTelaClienteLayout.setHorizontalGroup(
             pnlTelaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTelaClienteLayout.createSequentialGroup()
-                .addComponent(lbCabecalho)
+                .addGroup(pnlTelaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbCabecalho)
+                    .addGroup(pnlTelaClienteLayout.createSequentialGroup()
+                        .addGap(223, 223, 223)
+                        .addComponent(lbPerguntaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTelaClienteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -81,19 +92,16 @@ public class TelaCliente extends javax.swing.JFrame {
                             .addComponent(bComerAqui, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(273, 273, 273))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTelaClienteLayout.createSequentialGroup()
-                        .addComponent(lbPerguntaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(249, 249, 249))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTelaClienteLayout.createSequentialGroup()
-                        .addComponent(lbBemVindo, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(122, 122, 122))))
+                        .addComponent(lbBemVindo)
+                        .addGap(81, 81, 81))))
         );
         pnlTelaClienteLayout.setVerticalGroup(
             pnlTelaClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTelaClienteLayout.createSequentialGroup()
                 .addComponent(lbCabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(lbBemVindo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbBemVindo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbPerguntaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(bComerAqui)
@@ -110,7 +118,9 @@ public class TelaCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlTelaCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlTelaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
@@ -119,13 +129,12 @@ public class TelaCliente extends javax.swing.JFrame {
 
     private void bParaViagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bParaViagemActionPerformed
         // TODO add your handling code here:
-        takeOut = true;
+        MenuPedido.cliente = TelaCliente.cliente;
         new MenuPedido().setVisible(true);
     }//GEN-LAST:event_bParaViagemActionPerformed
 
     private void bComerAquiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bComerAquiActionPerformed
         // TODO add your handling code here:
-        takeOut = false;
     }//GEN-LAST:event_bComerAquiActionPerformed
 
     /**

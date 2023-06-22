@@ -30,7 +30,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnlMenuPrincipal = new javax.swing.JPanel();
         lbCabecalho = new javax.swing.JLabel();
         bCliente = new javax.swing.JButton();
-        bADM = new javax.swing.JButton();
+        bFuncionario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Miqueias Fast Food - Menu Principal");
@@ -50,8 +50,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        bADM.setText("Administrador");
-        bADM.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        bFuncionario.setText("Funcionário");
+        bFuncionario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        bFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bFuncionarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlMenuPrincipalLayout = new javax.swing.GroupLayout(pnlMenuPrincipal);
         pnlMenuPrincipal.setLayout(pnlMenuPrincipalLayout);
@@ -61,7 +66,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(324, 324, 324)
                 .addGroup(pnlMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(bCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bADM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(326, 326, 326))
             .addGroup(pnlMenuPrincipalLayout.createSequentialGroup()
                 .addComponent(lbCabecalho)
@@ -72,10 +77,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(pnlMenuPrincipalLayout.createSequentialGroup()
                 .addComponent(lbCabecalho)
                 .addGap(190, 190, 190)
-                .addComponent(bCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                .addComponent(bCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(bADM, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                .addGap(388, 388, 388))
+                .addComponent(bFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(249, 249, 249))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -97,6 +102,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         new TelaCliente().setVisible(true);
     }//GEN-LAST:event_bClienteActionPerformed
+
+    private void bFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFuncionarioActionPerformed
+        // TODO add your handling code here:
+        new LoginFun().setVisible(true);
+    }//GEN-LAST:event_bFuncionarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,8 +144,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bADM;
     private javax.swing.JButton bCliente;
+    private javax.swing.JButton bFuncionario;
     private javax.swing.JLabel lbCabecalho;
     private javax.swing.JPanel pnlMenuPrincipal;
     // End of variables declaration//GEN-END:variables

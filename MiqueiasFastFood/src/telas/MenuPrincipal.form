@@ -52,7 +52,7 @@
                   <EmptySpace min="-2" pref="324" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="bCliente" max="32767" attributes="0"/>
-                      <Component id="bADM" max="32767" attributes="0"/>
+                      <Component id="bFuncionario" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="326" max="-2" attributes="0"/>
               </Group>
@@ -67,10 +67,10 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="lbCabecalho" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
-                  <Component id="bCliente" pref="50" max="32767" attributes="0"/>
+                  <Component id="bCliente" max="32767" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Component id="bADM" pref="50" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="388" max="-2" attributes="0"/>
+                  <Component id="bFuncionario" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="249" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -97,15 +97,18 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bClienteActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="bADM">
+        <Component class="javax.swing.JButton" name="bFuncionario">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Administrador"/>
+            <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder roundedCorners="true"/>
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bFuncionarioActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
