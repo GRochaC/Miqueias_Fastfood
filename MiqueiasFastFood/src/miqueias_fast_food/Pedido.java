@@ -30,7 +30,7 @@ public class Pedido {
     
     // Construtor da classe Pedido
     public Pedido(Cliente cliente, int idPedido, boolean takeOut) {
-        this.itensPedidos = new ArrayList<>(99);
+        this.itensPedidos = new ArrayList<>();
         this.cliente = cliente;
         this.idPedido = idPedido;
         this.takeOut = takeOut;
