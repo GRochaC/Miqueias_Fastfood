@@ -3,30 +3,10 @@ package miqueias_fast_food;
 import java.util.*;
 import java.io.*;
 
-class Propriedades{
-    private int quantidade;
-    private float preco;
-    private String valorNutricional, tipo; 
-    
-    public Propriedades(int quantidade, float preco, String valorNutricional, String tipo){
-        this.quantidade = quantidade;
-        this.preco = preco;
-        this.valorNutricional = valorNutricional;
-        this.tipo = tipo;
-    }
-    public int getQuantidade(){
-        return this.quantidade;
-    }
-    public float getPreco(){
-        return this.preco;
-    }
-    public String getValorNutricional(){
-        return this.valorNutricional;
-    }
-    public String getTipo(){
-        return this.tipo;
-    }
-}
+/**
+ * @author Caleb:
+ * Classe que mantém o conteúdo do que está no estoque do estabelecimento
+ */
 
 public class Estoque{
     
@@ -56,7 +36,7 @@ public class Estoque{
                 // Em cada linha do estoque se tem o nome de um ingrediente junto com sua quantidade 
                 // separados por espaço
                 String[] conteudoDaLinha = linha.split(" ");
-                Propriedades propriedades = new Propriedades(Integer.parseInt(conteudoDaLinha[1]), Float.parseFloat(conteudoDaLinha[2]), conteudoDaLinha[3], conteudoDaLinha[4]);
+                Propriedades propriedades = new Propriedades(Integer.parseInt(conteudoDaLinha[1]), Float.parseFloat(conteudoDaLinha[2]), Integer.parseInt(conteudoDaLinha[3]), conteudoDaLinha[4]);
                 ingredientes.put(conteudoDaLinha[0], propriedades);
 
                 // Coloca em indiceDosIngredientes o nome do ingrediente visto e sua respectiva linha 
@@ -75,7 +55,7 @@ public class Estoque{
 
 
     // Método para se adicionar um item ao estoque
-    public static void adicionarItem(String nomeDoItem, int quantidadeDoItem, float preooDoItem, String valorNutricionalDoItem, String tipoDoItem){
+    public static void adicionarItem(String nomeDoItem, int quantidadeDoItem, float preooDoItem, int valorNutricionalDoItem, String tipoDoItem){
 
         // Este método não edita itens, logo se um item já está no estoque,
         // é avisado que ele já está
@@ -129,7 +109,7 @@ public class Estoque{
 
             // Modifica no array de linhas a linha que desejamos editar, usando como auxílio 
             // o HashMap que usamos para guardar a linha no arquivo de cada item 
-            linhas[indiceDosIngredientes.get(nomeDoItem) - 1] = String.format("%s %d %.2f %s %s", nomeDoItem, novaQuantidade, novoValorNutricional, novoTipo);
+            linhas[indiceDosIngredientes.get(nomeDoItem) - 1] = String.format("%s %d %.2f %d %s", nomeDoItem, novaQuantidade, novoValorNutricional, novoTipo);
 
             // Reescreve o arquivo
             BufferedWriter escritor = new BufferedWriter(new FileWriter(arquivo, false));
