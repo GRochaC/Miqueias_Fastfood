@@ -10,8 +10,8 @@ import java.io.*;
 
 public class Estoque{
     
-    // HashMap para manter os ingredientes e suas respectivas propriedades 
-    private static HashMap<String, Propriedades> ingredientes = new HashMap<>();
+    // HashMap para manter os ingredientes e sua respectiva quantidade 
+    private static HashMap<String, Integer> ingredientes = new HashMap<>();
     
     private final static String DIRETORIO_ESTOQUE = "estoque.txt";
     
@@ -24,7 +24,7 @@ public class Estoque{
 
 
     // Popula o HashMap com o conteúdo encontrado no arquivo local estoque.txt
-    public static void atualizarEstoque(){
+    public static void carregaEstoque(){
         try{
             // Leitor de arquivos 
             BufferedReader leitor = new BufferedReader(new FileReader(DIRETORIO_ESTOQUE));
@@ -35,9 +35,8 @@ public class Estoque{
                 
                 // Em cada linha do estoque se tem o nome de um ingrediente junto com sua quantidade 
                 // separados por espaço
-                String[] conteudoDaLinha = linha.split(" ");
-                Propriedades propriedades = new Propriedades(Integer.parseInt(conteudoDaLinha[1]), Float.parseFloat(conteudoDaLinha[2]), Integer.parseInt(conteudoDaLinha[3]), conteudoDaLinha[4]);
-                ingredientes.put(conteudoDaLinha[0], propriedades);
+                String[] conteudoDaLinha = linha.split(";");
+                ingredientes.put(conteudoDaLinha[0], Integer.parseInt(conteudoDaLinha[1]));
 
                 // Coloca em indiceDosIngredientes o nome do ingrediente visto e sua respectiva linha 
                 // no arquivo
@@ -48,45 +47,42 @@ public class Estoque{
             // Fecha o leitor depois de ler todas as linhas
             leitor.close();
         }catch(IOException e){
-            // Caso haja algum erro na leitura do arquivo, se mostra o erro
-            e.printStackTrace();
+            // Ignora a exceção
         }
     }
 
 
     // Método para se adicionar um item ao estoque
-    public static void adicionarItem(String nomeDoItem, int quantidadeDoItem, float preooDoItem, int valorNutricionalDoItem, String tipoDoItem){
+    public static boolean adicionarItem(String nomeDoItem, int quantidadeDoItem){
 
         // Este método não edita itens, logo se um item já está no estoque,
-        // é avisado que ele já está
+        // é avisado que ele já está no estoque e é retornado falso
         if(ingredientes.containsKey(nomeDoItem))
-            System.out.println("Item já está no estoque!");
-        else{
+            return false;
+        try {
+            // Insere item no arquivo
+            BufferedWriter escritor = new BufferedWriter(new FileWriter(DIRETORIO_ESTOQUE, true));
+            escritor.write(String.format("%s;%d", nomeDoItem, quantidadeDoItem));
+            escritor.newLine();
+            
+            // Insere item no HashMap de ingredientes e guarda em qual linha ele se encontra no arquivo 
+            ingredientes.put(nomeDoItem, quantidadeDoItem);
+            indiceDosIngredientes.put(nomeDoItem, numeroDeLinhas);
+            ++numeroDeLinhas;
 
-            try {
-                // Insere item no arquivo
-                BufferedWriter escritor = new BufferedWriter(new FileWriter(DIRETORIO_ESTOQUE, true));
-                escritor.write(String.format("%s %d %.2f %s %s", nomeDoItem, quantidadeDoItem, preooDoItem, tipoDoItem, valorNutricionalDoItem));
-                escritor.newLine();
-                
-                // Insere item no HashMap de ingredientes e guarda em qual linha ele se encontra no arquivo 
-                ingredientes.put(nomeDoItem, new Propriedades(quantidadeDoItem, preooDoItem, valorNutricionalDoItem, tipoDoItem));
-                indiceDosIngredientes.put(nomeDoItem, numeroDeLinhas);
-                ++numeroDeLinhas;
+            // Fecha o escritor
+            escritor.close();
 
-                // Fecha o escritor
-                escritor.close();
-
-            } catch (IOException e) {
-
-                // Caso haja algum erro na escrita do arquivo, se mostra o erro
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            // Ignora a exceção
         }
+        
+        // Se deu tudo certo, é retornado true
+        return true;
     }
 
     // Método para editar a quantidade disponível de um item
-    public static void editarItem(String nomeDoItem, int novaQuantidade, float novoPreco, String novoValorNutricional, String novoTipo){
+    public static void editarItem(String nomeDoItem, int novaQuantidade){
         try {
             // Leia o arquivo 
             File arquivo = new File(DIRETORIO_ESTOQUE);
@@ -109,7 +105,7 @@ public class Estoque{
 
             // Modifica no array de linhas a linha que desejamos editar, usando como auxílio 
             // o HashMap que usamos para guardar a linha no arquivo de cada item 
-            linhas[indiceDosIngredientes.get(nomeDoItem) - 1] = String.format("%s %d %.2f %d %s", nomeDoItem, novaQuantidade, novoValorNutricional, novoTipo);
+            linhas[indiceDosIngredientes.get(nomeDoItem) - 1] = String.format("%s;%d", nomeDoItem, novaQuantidade);
 
             // Reescreve o arquivo
             BufferedWriter escritor = new BufferedWriter(new FileWriter(arquivo, false));
@@ -160,6 +156,7 @@ public class Estoque{
             // Reescreve o arquivo no modo de sobreescrita
             BufferedWriter escritor = new BufferedWriter(new FileWriter(arquivo, false));
             for (String linhaAtualizada : linhas) {
+                // Compensa para a linha vazia que estará  no array
                 if(linha != ""){
                     escritor.write(linhaAtualizada);
                     escritor.newLine();
@@ -174,27 +171,15 @@ public class Estoque{
 
         } catch (IOException e) {
 
-            // Se houver algum erro na leitura ou escrita, mostre o erro
-            e.printStackTrace();
+            // Ignora a exceção
         }
     }
 
-    // Mostra todos os ingredientes no estoque e sua exata quantidade
-    public static String[] contagemItens(){
-        String relatorio[] = new String[ingredientes.size()];
-        int contador = 0;
-        for(Map.Entry<String, Propriedades> ingrediente : ingredientes.entrySet()){
-            relatorio[contador++] = "Há " + ingrediente.getValue()+ "unidade(s) de " + ingrediente + "no estoque.";
-        }
-        return relatorio;
+    public static int tamanhoDoEstoque(){
+        return (numeroDeLinhas - 1);
     }
     
-    public static int getSize(){
-        return Estoque.ingredientes.size();
-    }
-    
-    public static HashMap<String, Propriedades> getEstoque(){
+    public static HashMap<String, Integer> getEstoque(){
         return Estoque.ingredientes;
     }
-
 }
