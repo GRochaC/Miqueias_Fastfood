@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- *
+/*
  * @author guilherme
+ * Classe responsável pela leitura, salvamento e criação de objetos Item de um arquivo .txt
  */
 public class CarregaItens {
     // ArrayList onde ficará armazenado os itens lidos do arquivo .txt
