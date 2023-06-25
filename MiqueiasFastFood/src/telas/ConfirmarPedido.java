@@ -4,6 +4,8 @@
  */
 package telas;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import miqueias_fast_food.*;
 
 /**
@@ -19,16 +21,16 @@ public class ConfirmarPedido extends javax.swing.JFrame {
         
         setLocationRelativeTo(null);
         
+        DefaultListModel model = new DefaultListModel();
+        for(ItemPedido ip : pedido.getItensPedidos()) {
+            model.addElement(ip.toString());
+        }
+        listaPedido.setModel(model);
+        
+        String valor_total_s = String.format("R$ %.2f", pedido.getTotal());
+        lbValorPedido.setText(valor_total_s);
     }
     
-    public ConfirmarPedido(Cliente cliente, Pedido pedido) {
-        initComponents();
-        
-        setLocationRelativeTo(null);
-        
-        ConfirmarPedido.cliente = cliente;
-        ConfirmarPedido.pedido = pedido;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,6 +49,8 @@ public class ConfirmarPedido extends javax.swing.JFrame {
         bCancelar = new javax.swing.JButton();
         bEditar = new javax.swing.JButton();
         bPagar = new javax.swing.JButton();
+        lbValorTotal = new javax.swing.JLabel();
+        lbValorPedido = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Miqueias Fast Food - Finalizar Pedido");
@@ -57,17 +61,17 @@ public class ConfirmarPedido extends javax.swing.JFrame {
         lbCabecalho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cabecalho.png"))); // NOI18N
 
         listaPedido.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seu Pedido", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Emoji", 3, 12))); // NOI18N
-        listaPedido.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "..." };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         spPedido.setViewportView(listaPedido);
 
         pnlConfirmarPedido2.setBackground(new java.awt.Color(244, 244, 244));
         pnlConfirmarPedido2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         bCancelar.setText("Cancelar");
+        bCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCancelarActionPerformed(evt);
+            }
+        });
 
         bEditar.setText("Editar");
         bEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -83,28 +87,43 @@ public class ConfirmarPedido extends javax.swing.JFrame {
             }
         });
 
+        lbValorTotal.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        lbValorTotal.setText("Valor Total:");
+
+        lbValorPedido.setText("-");
+
         javax.swing.GroupLayout pnlConfirmarPedido2Layout = new javax.swing.GroupLayout(pnlConfirmarPedido2);
         pnlConfirmarPedido2.setLayout(pnlConfirmarPedido2Layout);
         pnlConfirmarPedido2Layout.setHorizontalGroup(
             pnlConfirmarPedido2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlConfirmarPedido2Layout.createSequentialGroup()
-                .addGap(100, 100, 100)
+                .addContainerGap()
                 .addComponent(bCancelar)
+                .addGap(129, 129, 129)
+                .addComponent(bPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bPagar)
-                .addGap(60, 60, 60)
-                .addComponent(bEditar)
-                .addGap(107, 107, 107))
+                .addComponent(bEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(pnlConfirmarPedido2Layout.createSequentialGroup()
+                .addGap(193, 193, 193)
+                .addComponent(lbValorTotal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbValorPedido)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlConfirmarPedido2Layout.setVerticalGroup(
             pnlConfirmarPedido2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlConfirmarPedido2Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlConfirmarPedido2Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(pnlConfirmarPedido2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbValorTotal)
+                    .addComponent(lbValorPedido))
+                .addGap(18, 18, 18)
                 .addGroup(pnlConfirmarPedido2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bCancelar)
-                    .addComponent(bEditar)
-                    .addComponent(bPagar))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(bPagar)
+                    .addComponent(bEditar))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnlConfirmarPedidoLayout = new javax.swing.GroupLayout(pnlConfirmarPedido);
@@ -125,11 +144,11 @@ public class ConfirmarPedido extends javax.swing.JFrame {
             pnlConfirmarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlConfirmarPedidoLayout.createSequentialGroup()
                 .addComponent(lbCabecalho)
-                .addGap(56, 56, 56)
-                .addComponent(spPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlConfirmarPedido2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(23, 23, 23))
+                .addGap(18, 18, 18)
+                .addComponent(spPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlConfirmarPedido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -151,9 +170,9 @@ public class ConfirmarPedido extends javax.swing.JFrame {
 
     private void bPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPagarActionPerformed
         // TODO add your handling code here:
-        new Pagamento().setVisible(true);
         Pagamento.cliente = cliente;
         Pagamento.pedido = pedido;
+        new Pagamento().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bPagarActionPerformed
 
@@ -162,6 +181,16 @@ public class ConfirmarPedido extends javax.swing.JFrame {
         new MenuPedido(cliente, pedido).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bEditarActionPerformed
+
+    private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
+        // TODO add your handling code here:
+        try {
+            String aviso = "Você deseja cancelar o pedido? Digite \"CANCELAR\" para cancelar o pedido.";
+            String cancelar =JOptionPane.showInputDialog(null, aviso, "Cancelamento de pedido", 
+                    JOptionPane.CANCEL_OPTION);
+            if(cancelar.equals("CANCELAR")) this.dispose();
+        } catch (NullPointerException ignorException){}
+    }//GEN-LAST:event_bCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,6 +232,8 @@ public class ConfirmarPedido extends javax.swing.JFrame {
     private javax.swing.JButton bEditar;
     private javax.swing.JButton bPagar;
     private javax.swing.JLabel lbCabecalho;
+    private javax.swing.JLabel lbValorPedido;
+    private javax.swing.JLabel lbValorTotal;
     private javax.swing.JList<String> listaPedido;
     private javax.swing.JPanel pnlConfirmarPedido;
     private javax.swing.JPanel pnlConfirmarPedido2;
