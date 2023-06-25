@@ -26,117 +26,105 @@ public class TelaFuncionario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlTelaFuncionario = new javax.swing.JPanel();
         lbCabecalho = new javax.swing.JLabel();
-        bVoltar3 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        bRemover = new javax.swing.JButton();
-        bRemover1 = new javax.swing.JButton();
+        bEdição = new javax.swing.JButton();
+        bFuncionarios1 = new javax.swing.JButton();
+        lbBemVindo = new javax.swing.JLabel();
+        bSair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        pnlTelaFuncionario.setBackground(new java.awt.Color(244, 244, 244));
 
         lbCabecalho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cabecalho.png"))); // NOI18N
 
-        bVoltar3.setText("Voltar");
-        bVoltar3.addActionListener(new java.awt.event.ActionListener() {
+        bEdição.setText("Edição");
+        bEdição.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        bEdição.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bVoltar3ActionPerformed(evt);
+                bEdiçãoActionPerformed(evt);
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/iconeadm.png"))); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel1.setText("ID: 000000000");
-
-        jLabel3.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel3.setText("Nome");
-
-        bRemover.setText("Editar mesas");
-        bRemover.addActionListener(new java.awt.event.ActionListener() {
+        bFuncionarios1.setText("Funcionários");
+        bFuncionarios1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        bFuncionarios1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bRemoverActionPerformed(evt);
+                bFuncionarios1ActionPerformed(evt);
             }
         });
 
-        bRemover1.setText("Editar cardápio");
-        bRemover1.addActionListener(new java.awt.event.ActionListener() {
+        lbBemVindo.setFont(new java.awt.Font("Segoe UI Emoji", 2, 36)); // NOI18N
+        lbBemVindo.setText("Bem-vindo, <nome>");
+
+        bSair.setText("Sair");
+        bSair.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        bSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bRemover1ActionPerformed(evt);
+                bSairActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout pnlTelaFuncionarioLayout = new javax.swing.GroupLayout(pnlTelaFuncionario);
+        pnlTelaFuncionario.setLayout(pnlTelaFuncionarioLayout);
+        pnlTelaFuncionarioLayout.setHorizontalGroup(
+            pnlTelaFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTelaFuncionarioLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lbCabecalho))
+            .addGroup(pnlTelaFuncionarioLayout.createSequentialGroup()
+                .addGap(210, 210, 210)
+                .addComponent(lbBemVindo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTelaFuncionarioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlTelaFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bSair, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bFuncionarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bEdição, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(273, 273, 273))
+        );
+        pnlTelaFuncionarioLayout.setVerticalGroup(
+            pnlTelaFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTelaFuncionarioLayout.createSequentialGroup()
+                .addComponent(lbCabecalho)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addComponent(lbBemVindo)
+                .addGap(18, 18, 18)
+                .addComponent(bFuncionarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bEdição, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bSair, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(109, 109, 109))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(lbCabecalho)
-                .addGap(0, 306, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bVoltar3)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(784, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(212, 212, 212))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(308, 308, 308)
-                    .addComponent(bRemover1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(526, Short.MAX_VALUE)))
+            .addComponent(pnlTelaFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbCabecalho)
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(333, 333, 333)
-                        .addComponent(bRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(110, 110, 110)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
-                .addComponent(bVoltar3)
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(334, 334, 334)
-                    .addComponent(bRemover1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(500, Short.MAX_VALUE)))
+            .addComponent(pnlTelaFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bVoltar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltar3ActionPerformed
+    private void bEdiçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEdiçãoActionPerformed
         // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_bVoltar3ActionPerformed
+    }//GEN-LAST:event_bEdiçãoActionPerformed
 
-    private void bRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoverActionPerformed
+    private void bFuncionarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFuncionarios1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bRemoverActionPerformed
+    }//GEN-LAST:event_bFuncionarios1ActionPerformed
 
-    private void bRemover1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemover1ActionPerformed
+    private void bSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSairActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bRemover1ActionPerformed
+    }//GEN-LAST:event_bSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,12 +163,11 @@ public class TelaFuncionario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bRemover;
-    private javax.swing.JButton bRemover1;
-    private javax.swing.JButton bVoltar3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton bEdição;
+    private javax.swing.JButton bFuncionarios1;
+    private javax.swing.JButton bSair;
+    private javax.swing.JLabel lbBemVindo;
     private javax.swing.JLabel lbCabecalho;
+    private javax.swing.JPanel pnlTelaFuncionario;
     // End of variables declaration//GEN-END:variables
 }
