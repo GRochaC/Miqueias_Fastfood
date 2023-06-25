@@ -10,7 +10,7 @@ public class Funcionario extends Pessoa {
     
     // senha do funcionário
     private String senha;
-
+    
     // Construtor da classe Funcionario
     public Funcionario(String login, String senha, String cpf, String nome) {
         super(cpf, nome);

@@ -45,4 +45,12 @@ public class ItemPedido {
     public Item getItem() {
         return item;
     }
+
+    @Override
+    public String toString() {
+        return String.format("x%d %s : %.2f", this.getQuantidade(), this.getItem().toString(),
+                this.getSubtotal());
+    }
+    
+    
 }
