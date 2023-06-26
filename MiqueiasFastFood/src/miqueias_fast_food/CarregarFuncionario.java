@@ -23,7 +23,7 @@ public class CarregarFuncionario {
         try (BufferedReader reader = new BufferedReader(new FileReader(funcionarioDir))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] data = line.split(" ");
+                String[] data = line.split(";");
                 if (data.length == 4) {
                     String login = data[0].trim();
                     String senha = data[1].trim();
@@ -40,7 +40,7 @@ public class CarregarFuncionario {
     
     public static void RegistraFuncionario(String l, String s, String c, String nome){
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(funcionarioDir, true))) {
-            String line = l + " " + s + " " + c + " " + nome;
+            String line = l + ";" + s + ";" + c + ";" + nome;
             writer.newLine();
             writer.write(line);
             writer.flush();
@@ -60,9 +60,9 @@ public class CarregarFuncionario {
 
         String line;
         while ((line = reader.readLine()) != null) {
-            String[] data = line.split(" ");
+            String[] data = line.split(";");
             if (data.length == 4 && data[0].equals(cLogin)) {
-                line = l + " " + senha + " " + cpf + " " + nome;
+                line = l + ";" + senha + ";" + cpf + ";" + nome;
             }
             writer.write(line);
             writer.newLine();
@@ -92,7 +92,7 @@ public class CarregarFuncionario {
 
         String line;
         while ((line = reader.readLine()) != null) {
-            String[] data = line.split(" ");
+            String[] data = line.split(";");
             if (data.length == 4 && data[0].equals(login)) {
                 continue; // Skip writing the line if the login matches
             }
