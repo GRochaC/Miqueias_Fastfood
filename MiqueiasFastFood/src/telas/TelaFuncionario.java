@@ -3,19 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package telas;
-
+import miqueias_fast_food.Funcionario;
 /**
  *
  * @author archago
  */
 public class TelaFuncionario extends javax.swing.JFrame {
-
     /**
      * Creates new form TelaAdm
      */
     public TelaFuncionario() {
         initComponents();
+        lbBemVindo.setText("Bem-vindo, " + LoginFun.logged.getNome());
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -120,10 +121,11 @@ public class TelaFuncionario extends javax.swing.JFrame {
 
     private void bFuncionarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFuncionarios1ActionPerformed
         // TODO add your handling code here:
+        new CadastrarEditarFuncionarios().setVisible(true);
     }//GEN-LAST:event_bFuncionarios1ActionPerformed
 
     private void bSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSairActionPerformed
-        // TODO add your handling code here:
+        new LoginFun().setVisible(true);
     }//GEN-LAST:event_bSairActionPerformed
 
     /**

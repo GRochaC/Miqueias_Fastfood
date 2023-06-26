@@ -4,18 +4,21 @@
  */
 package telas;
 
+import miqueias_fast_food.Funcionario;
+import miqueias_fast_food.CarregarFuncionario;
+import java.util.ArrayList;
+
 /**
  *
  * @author archago
  */
 public class LoginFun extends javax.swing.JFrame {
-
+    public static Funcionario logged;
     /**
      * Creates new form LoginAdm
      */
-    public LoginFun() {
+    public LoginFun() {        
         initComponents();
-        
         setLocationRelativeTo(null);
     }
 
@@ -35,7 +38,7 @@ public class LoginFun extends javax.swing.JFrame {
         lbLogin = new javax.swing.JLabel();
         lbSenha = new javax.swing.JLabel();
         txtLogin = new javax.swing.JTextField();
-        lbLoginSenhaIncorretos = new javax.swing.JLabel();
+        lbLoginMessage = new javax.swing.JLabel();
         bEntrar = new javax.swing.JButton();
         psswSenhar = new javax.swing.JPasswordField();
         bVoltar = new javax.swing.JButton();
@@ -64,10 +67,15 @@ public class LoginFun extends javax.swing.JFrame {
             }
         });
 
-        lbLoginSenhaIncorretos.setForeground(new java.awt.Color(255, 0, 51));
-        lbLoginSenhaIncorretos.setText("Login ou senha incorretos.");
+        lbLoginMessage.setForeground(new java.awt.Color(255, 0, 51));
+        lbLoginMessage.setText("Insira o usuário e a senha");
 
         bEntrar.setText("Entrar");
+        bEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEntrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlLoginLayout = new javax.swing.GroupLayout(pnlLogin);
         pnlLogin.setLayout(pnlLoginLayout);
@@ -90,7 +98,7 @@ public class LoginFun extends javax.swing.JFrame {
                         .addComponent(bEntrar)
                         .addGap(131, 131, 131))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
-                        .addComponent(lbLoginSenhaIncorretos)
+                        .addComponent(lbLoginMessage)
                         .addGap(72, 72, 72))))
         );
         pnlLoginLayout.setVerticalGroup(
@@ -105,13 +113,18 @@ public class LoginFun extends javax.swing.JFrame {
                     .addComponent(lbSenha)
                     .addComponent(psswSenhar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(lbLoginSenhaIncorretos)
+                .addComponent(lbLoginMessage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bEntrar)
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
         bVoltar.setText("Voltar");
+        bVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlLoginFunLayout = new javax.swing.GroupLayout(pnlLoginFun);
         pnlLoginFun.setLayout(pnlLoginFunLayout);
@@ -162,6 +175,36 @@ public class LoginFun extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLoginActionPerformed
 
+    private void bEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEntrarActionPerformed
+        // TODO add your handling code here:
+        String user = txtLogin.getText();
+        String senha = psswSenhar.getText();
+        
+        boolean loginValido = verificarLogin(user, senha);
+        
+        if(loginValido){
+            new TelaFuncionario().setVisible(true);
+        }
+        else{
+            lbLoginMessage.setText("Falha no login. Tente novamente.");
+        }
+        
+    }//GEN-LAST:event_bEntrarActionPerformed
+
+    private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
+        // TODO add your handling code here:
+        new MenuPrincipal().setVisible(true);
+    }//GEN-LAST:event_bVoltarActionPerformed
+    
+    private static boolean verificarLogin(String u, String p){
+        for(Funcionario f: MenuPrincipal.funcionarios){
+            if(f.getLogin().equals(u) && f.getSenha().equals(p)){
+                logged = f;
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * @param args the command line arguments
      */
@@ -204,7 +247,7 @@ public class LoginFun extends javax.swing.JFrame {
     private javax.swing.JLabel lbBemVindo;
     private javax.swing.JLabel lbCabecalho;
     private javax.swing.JLabel lbLogin;
-    private javax.swing.JLabel lbLoginSenhaIncorretos;
+    private javax.swing.JLabel lbLoginMessage;
     private javax.swing.JLabel lbSenha;
     private javax.swing.JPanel pnlLogin;
     private javax.swing.JPanel pnlLoginFun;

@@ -4,17 +4,39 @@
  */
 package telas;
 
+import java.util.InputMismatchException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import miqueias_fast_food.CarregarFuncionario;
+import miqueias_fast_food.Funcionario;
+
 /**
  *
  * @author guilherme
  */
 public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
+    
+    boolean novo;
 
     /**
      * Creates new form CadastrarEditarFuncionarios
      */
     public CadastrarEditarFuncionarios() {
+        
         initComponents();
+        popularTabela();
+        bCadastrar.setEnabled(true);
+        bSalvar.setEnabled(false);
+        bEditar.setEnabled(false);
+        bExcluir.setEnabled(false);
+        bVoltar.setEnabled(true);
+        
+        txtNome.setEnabled(false);
+        ftxtCPF.setEnabled(false);
+        txtLogin.setEnabled(false);
+        pswSenha.setEnabled(false);
+        pswConfirmarSenha.setEnabled(false);
+        
     }
 
     /**
@@ -85,12 +107,32 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
         txtLogin.setToolTipText("Campo obrigatório");
 
         bCadastrar.setText("Cadastrar");
+        bCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCadastrarActionPerformed(evt);
+            }
+        });
 
         bSalvar.setText("Salvar");
+        bSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSalvarActionPerformed(evt);
+            }
+        });
 
         bEditar.setText("Editar");
+        bEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEditarActionPerformed(evt);
+            }
+        });
 
         bExcluir.setText("Excluir");
+        bExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlInfoFunLayout = new javax.swing.GroupLayout(pnlInfoFun);
         pnlInfoFun.setLayout(pnlInfoFunLayout);
@@ -132,7 +174,7 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
             pnlInfoFunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInfoFunLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(pnlInfoFunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlInfoFunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlInfoFunLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(lbNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -144,15 +186,13 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(pnlInfoFunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlInfoFunLayout.createSequentialGroup()
-                        .addGroup(pnlInfoFunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlInfoFunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlInfoFunLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(ftxtCPF)))
+                                .addComponent(ftxtCPF))
+                            .addComponent(lbCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6))
-                    .addGroup(pnlInfoFunLayout.createSequentialGroup()
-                        .addComponent(bSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(bSalvar))
                 .addGroup(pnlInfoFunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlInfoFunLayout.createSequentialGroup()
                         .addGroup(pnlInfoFunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -164,7 +204,7 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addComponent(lbSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(pswSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(pnlInfoFunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlInfoFunLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlInfoFunLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(lbConfirmarSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -179,6 +219,11 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
         );
 
         bVoltar.setText("Voltar");
+        bVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVoltarActionPerformed(evt);
+            }
+        });
 
         scrPnlFuncionarios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Funcionários", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 3, 15))); // NOI18N
 
@@ -199,6 +244,11 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        tbFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbFuncionariosMouseClicked(evt);
             }
         });
         scrPnlFuncionarios.setViewportView(tbFuncionarios);
@@ -243,6 +293,251 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void popularTabela(){
+            DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Nome",
+                                                                           "CPF",
+                                                                           "Login",
+                                                                           "Senha"
+            }, 0);
+            
+            for(int i = 0; i<MenuPrincipal.funcionarios.size(); i++){
+                Object row[] = new Object[]{
+                    MenuPrincipal.funcionarios.get(i).getNome()
+                    ,MenuPrincipal.funcionarios.get(i).getCpf()
+                    ,MenuPrincipal.funcionarios.get(i).getLogin(),
+                    MenuPrincipal.funcionarios.get(i).getSenha()
+                };
+                modelo.addRow(row);
+            }
+            
+            tbFuncionarios.setModel(modelo);
+    }
+    private boolean validaForm(){
+        
+        if(txtNome.getText().isEmpty() || ftxtCPF.getText().isEmpty() || txtLogin.getText().isEmpty() || pswSenha.getText().isEmpty() || pswConfirmarSenha.getText().isEmpty()){
+            
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+
+            return false;
+        }
+        if(!pswSenha.getText().equals(pswConfirmarSenha.getText())){
+            JOptionPane.showMessageDialog(null, "Senhas não coincidem", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    
+    private boolean validaCPF(String CPF){
+        if (CPF.equals("00000000000") ||
+            CPF.equals("11111111111") ||
+            CPF.equals("22222222222") || CPF.equals("33333333333") ||
+            CPF.equals("44444444444") || CPF.equals("55555555555") ||
+            CPF.equals("66666666666") || CPF.equals("77777777777") ||
+            CPF.equals("88888888888") || CPF.equals("99999999999") ||
+            (CPF.length() != 11))
+            return(false);
+
+        char dig10, dig11;
+        int sm, i, r, num, peso;
+
+        // "try" - protege o codigo para eventuais erros de conversao de tipo (int)
+        try {
+        // Calculo do 1o. Digito Verificador
+            sm = 0;
+            peso = 10;
+            for (i=0; i<9; i++) {
+        // converte o i-esimo caractere do CPF em um numero:
+        // por exemplo, transforma o caractere '0' no inteiro 0
+        // (48 eh a posicao de '0' na tabela ASCII)
+            num = (int)(CPF.charAt(i) - 48);
+            sm = sm + (num * peso);
+            peso = peso - 1;
+            }
+
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11))
+                dig10 = '0';
+            else dig10 = (char)(r + 48); // converte no respectivo caractere numerico
+
+        // Calculo do 2o. Digito Verificador
+            sm = 0;
+            peso = 11;
+            for(i=0; i<10; i++) {
+            num = (int)(CPF.charAt(i) - 48);
+            sm = sm + (num * peso);
+            peso = peso - 1;
+            }
+
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11))
+                 dig11 = '0';
+            else dig11 = (char)(r + 48);
+
+        // Verifica se os digitos calculados conferem com os digitos informados.
+            if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
+                 return(true);
+            else return(false);
+                } catch (InputMismatchException erro) {
+                return(false);
+            }
+        }
+    
+    private boolean validaCadastro(String login, String senha, String cpf){
+        for(int i = 0; i<MenuPrincipal.funcionarios.size(); i++){
+            if(MenuPrincipal.funcionarios.get(i).getLogin().equals(login) || MenuPrincipal.funcionarios.get(i).getSenha().equals(senha) ){
+            JOptionPane.showMessageDialog(null, "Login ou senha inválidos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+            }
+        }
+        
+        
+        if(!validaCPF(cpf)){
+            JOptionPane.showMessageDialog(null, "CPF inválido", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private void bSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalvarActionPerformed
+        if(validaForm()){
+            String n = txtNome.getText();
+            String cpf = ftxtCPF.getText();
+            String l = txtLogin.getText();
+            String p = pswConfirmarSenha.getText();
+            
+            Funcionario f = new Funcionario(n, cpf, l, p);
+            
+            
+            if(novo && validaCadastro(l, p, cpf)){
+               
+               MenuPrincipal.funcionarios.add(f);
+               CarregarFuncionario.RegistraFuncionario(l, p, cpf, n);
+               JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if(!novo && validaCadastro(l, p, cpf)){
+                int index = tbFuncionarios.getSelectedRow();
+                
+                String temp = MenuPrincipal.funcionarios.get(index).getLogin();
+                
+                CarregarFuncionario.EditarFuncionario(temp, l, p, cpf, n);
+                MenuPrincipal.funcionarios.get(index).setCpf(cpf);
+                MenuPrincipal.funcionarios.get(index).setNome(n);
+                MenuPrincipal.funcionarios.get(index).setLogin(l);
+                MenuPrincipal.funcionarios.get(index).setSenha(p);
+            }
+               bCadastrar.setEnabled(true);
+               bSalvar.setEnabled(false);
+               bEditar.setEnabled(false);
+               bExcluir.setEnabled(false);
+               bVoltar.setEnabled(true);
+               
+               txtNome.setText("");
+               ftxtCPF.setText("");
+               txtLogin.setText("");
+               pswSenha.setText("");
+               pswConfirmarSenha.setText("");
+               
+               txtNome.setEnabled(false);
+               ftxtCPF.setEnabled(false);
+               txtLogin.setEnabled(false);
+               pswSenha.setEnabled(false);
+               pswConfirmarSenha.setEnabled(false);
+               popularTabela();
+        }
+    }//GEN-LAST:event_bSalvarActionPerformed
+
+    private void bCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCadastrarActionPerformed
+        novo = true;
+        bCadastrar.setEnabled(false);
+        bSalvar.setEnabled(true);
+        bEditar.setEnabled(false);
+        bExcluir.setEnabled(false);
+        bVoltar.setEnabled(true);
+        
+        txtNome.setEnabled(true);
+        ftxtCPF.setEnabled(true);
+        txtLogin.setEnabled(true);
+        pswSenha.setEnabled(true);
+        pswConfirmarSenha.setEnabled(true);
+    }//GEN-LAST:event_bCadastrarActionPerformed
+
+    private void tbFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbFuncionariosMouseClicked
+        int i = tbFuncionarios.getSelectedRow();
+        if(i >= 0 && i < MenuPrincipal.funcionarios.size()){
+               Funcionario f = MenuPrincipal.funcionarios.get(i);
+               
+               
+               bCadastrar.setEnabled(false);
+               bSalvar.setEnabled(true);
+               bEditar.setEnabled(true);
+               bExcluir.setEnabled(true);
+               bVoltar.setEnabled(true);
+               
+               txtNome.setText(f.getNome());
+               ftxtCPF.setText(f.getCpf());
+               txtLogin.setText(f.getLogin());
+               pswSenha.setText(f.getSenha());
+               pswConfirmarSenha.setText(f.getSenha());
+               
+               txtNome.setEnabled(false);
+               ftxtCPF.setEnabled(false);
+               txtLogin.setEnabled(false);
+               pswSenha.setEnabled(false);
+               pswConfirmarSenha.setEnabled(false);
+        }
+    }//GEN-LAST:event_tbFuncionariosMouseClicked
+
+    private void bEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditarActionPerformed
+        novo = false;
+        
+        bCadastrar.setEnabled(false);
+        bSalvar.setEnabled(true);
+        bEditar.setEnabled(false);
+        bExcluir.setEnabled(false);
+        bVoltar.setEnabled(true);
+        
+        txtNome.setEnabled(true);
+        ftxtCPF.setEnabled(true);
+        txtLogin.setEnabled(true);
+        pswSenha.setEnabled(true);
+        pswConfirmarSenha.setEnabled(true);
+    }//GEN-LAST:event_bEditarActionPerformed
+
+    private void bExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExcluirActionPerformed
+        int index = tbFuncionarios.getSelectedRow();
+        
+        if(index >= 0 && index < MenuPrincipal.funcionarios.size()){
+            CarregarFuncionario.DeletarFuncionario(MenuPrincipal.funcionarios.get(index).getLogin());
+            MenuPrincipal.funcionarios.remove(index);
+            popularTabela();
+        }
+        
+        bCadastrar.setEnabled(true);
+        bSalvar.setEnabled(false);
+        bEditar.setEnabled(false);
+        bExcluir.setEnabled(false);
+        bVoltar.setEnabled(true);
+        
+        txtNome.setText("");
+        ftxtCPF.setText("");
+        txtLogin.setText("");
+        pswSenha.setText("");
+        pswConfirmarSenha.setText("");
+        
+        txtNome.setEnabled(false);
+        ftxtCPF.setEnabled(false);
+        txtLogin.setEnabled(false);
+        pswSenha.setEnabled(false);
+        pswConfirmarSenha.setEnabled(false);
+        
+    }//GEN-LAST:event_bExcluirActionPerformed
+
+    private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
+        new TelaFuncionario().setVisible(true);
+    }//GEN-LAST:event_bVoltarActionPerformed
 
     /**
      * @param args the command line arguments

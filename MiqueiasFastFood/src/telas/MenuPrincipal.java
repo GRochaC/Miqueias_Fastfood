@@ -4,17 +4,24 @@
  */
 package telas;
 
+import java.util.ArrayList;
+import miqueias_fast_food.CarregarFuncionario;
+import miqueias_fast_food.Funcionario;
+
 /**
  *
  * @author Guilherme
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-
+    public static ArrayList<Funcionario> funcionarios;
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
+        CarregarFuncionario.FetchWorkers();
+        funcionarios = CarregarFuncionario.getTabelaFuncionarios();
         initComponents();
+        
         
     }
 
@@ -105,6 +112,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void bFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFuncionarioActionPerformed
         // TODO add your handling code here:
+        
         new LoginFun().setVisible(true);
     }//GEN-LAST:event_bFuncionarioActionPerformed
 

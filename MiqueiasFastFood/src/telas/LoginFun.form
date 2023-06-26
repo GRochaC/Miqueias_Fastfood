@@ -133,7 +133,7 @@
                               <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="lbLoginSenhaIncorretos" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbLoginMessage" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -154,7 +154,7 @@
                           <Component id="psswSenhar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lbLoginSenhaIncorretos" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbLoginMessage" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="bEntrar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="52" max="32767" attributes="0"/>
@@ -178,18 +178,21 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtLoginActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbLoginSenhaIncorretos">
+            <Component class="javax.swing.JLabel" name="lbLoginMessage">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="0" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Login ou senha incorretos."/>
+                <Property name="text" type="java.lang.String" value="Insira o usu&#xe1;rio e a senha"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="bEntrar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Entrar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bEntrarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JPasswordField" name="psswSenhar">
             </Component>
@@ -199,6 +202,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Voltar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bVoltarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
