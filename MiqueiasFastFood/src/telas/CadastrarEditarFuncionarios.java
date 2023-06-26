@@ -17,7 +17,7 @@ import miqueias_fast_food.Funcionario;
 public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
     
     boolean novo;
-
+    
     /**
      * Creates new form CadastrarEditarFuncionarios
      */
@@ -98,7 +98,7 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
         pswConfirmarSenha.setToolTipText("Campo obrigatório");
 
         try {
-            ftxtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            ftxtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -295,6 +295,11 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void popularTabela(){
+        /*
+        este método popula a tabela tbFuncionarios 
+        com os dados dos funcionarios presentes
+        na arraylist de funcionarios
+        */
             DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Nome",
                                                                            "CPF",
                                                                            "Login",
@@ -314,6 +319,12 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
             tbFuncionarios.setModel(modelo);
     }
     private boolean validaForm(){
+        /*
+        este método é utilizado 
+        para verificar se todos os campos foram
+        preenchidos antes que os valores nele sejam atribuídos 
+        à variáveis e processados
+        */
         
         if(txtNome.getText().isEmpty() || ftxtCPF.getText().isEmpty() || txtLogin.getText().isEmpty() || pswSenha.getText().isEmpty() || pswConfirmarSenha.getText().isEmpty()){
             
@@ -330,6 +341,13 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
     
     
     private boolean validaCPF(String CPF){
+        
+        /*
+        este método valida um cpf
+        informado de acordo com os critérios
+        do governo federal
+        */
+        
         if (CPF.equals("00000000000") ||
             CPF.equals("11111111111") ||
             CPF.equals("22222222222") || CPF.equals("33333333333") ||
@@ -385,6 +403,16 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
         }
     
     private boolean validaCadastro(String login, String senha, String cpf){
+        
+        /*
+        este método valida um cadastro considerando 
+        o login e a senha informados e o cpf.
+        inicialmente, verifica-se se o login ou a senha são
+        válidos, isto é, se não há no sistema funcionarios 
+        com aquele login ou aquela senha. Verificado isto,
+        o cpf fornecido é validado pelo métod validaCPF.
+        */
+        
         for(int i = 0; i<MenuPrincipal.funcionarios.size(); i++){
             if(MenuPrincipal.funcionarios.get(i).getLogin().equals(login) || MenuPrincipal.funcionarios.get(i).getSenha().equals(senha) ){
             JOptionPane.showMessageDialog(null, "Login ou senha inválidos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
@@ -402,6 +430,17 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
     }
     
     private void bSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalvarActionPerformed
+        boolean finished = false;
+        /*
+        este método inicia o processo de salvar os dados fornecidos levando 
+        em conta a existência de valores nos campos do formulário, verificação
+        feita pelo método validaForm, e a validade dos valores informados,
+        verificação feita pelo método validaCadastro.
+        Também é levado em conta se o que se quer é
+        editar um cadastro já existente ou criar um novo,
+        possibilidades que são controladas pela flag 'novo'.
+        */
+        
         if(validaForm()){
             String n = txtNome.getText();
             String cpf = ftxtCPF.getText();
@@ -416,6 +455,7 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
                MenuPrincipal.funcionarios.add(f);
                CarregarFuncionario.RegistraFuncionario(l, p, cpf, n);
                JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+               finished = true;
             }
             else if(!novo && validaCadastro(l, p, cpf)){
                 int index = tbFuncionarios.getSelectedRow();
@@ -427,7 +467,9 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
                 MenuPrincipal.funcionarios.get(index).setNome(n);
                 MenuPrincipal.funcionarios.get(index).setLogin(l);
                 MenuPrincipal.funcionarios.get(index).setSenha(p);
+                finished = true;
             }
+            if(finished){
                bCadastrar.setEnabled(true);
                bSalvar.setEnabled(false);
                bEditar.setEnabled(false);
@@ -446,6 +488,7 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
                pswSenha.setEnabled(false);
                pswConfirmarSenha.setEnabled(false);
                popularTabela();
+            }
         }
     }//GEN-LAST:event_bSalvarActionPerformed
 
