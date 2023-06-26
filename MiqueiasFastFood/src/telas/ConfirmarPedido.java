@@ -187,7 +187,7 @@ public class ConfirmarPedido extends javax.swing.JFrame {
         try {
             String aviso = "Você deseja cancelar o pedido? Digite \"CANCELAR\" para cancelar o pedido.";
             String cancelar =JOptionPane.showInputDialog(null, aviso, "Cancelamento de pedido", 
-                    JOptionPane.CANCEL_OPTION);
+                    JOptionPane.WARNING_MESSAGE);
             if(cancelar.equals("CANCELAR")) this.dispose();
         } catch (NullPointerException ignorException){}
     }//GEN-LAST:event_bCancelarActionPerformed
