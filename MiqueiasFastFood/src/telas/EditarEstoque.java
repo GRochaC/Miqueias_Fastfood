@@ -18,8 +18,18 @@ import miqueias_fast_food.Estoque;
  * @author caleb
  */
  
-public class EditarEstoque extends javax.swing.JFrame {
+class BooleanMutavel{
+    boolean confirmar = false;
+    public void mudar(){
+        confirmar = !confirmar;
+    }
+    public boolean getValue(){
+        return this.confirmar;
+    }
+}
 
+public class EditarEstoque extends javax.swing.JFrame {
+    JTable jTable2;
     /**
      * Creates new form EditarCardapio
      */
@@ -30,24 +40,27 @@ public class EditarEstoque extends javax.swing.JFrame {
     //@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        Estoque.carregaEstoque();
 
         // Referência do hashmap de estoque
-        HashMap<String, Integer> estoque = Estoque.getEstoque();
+        estoque = new HashMap<>(Estoque.getEstoque());
 
         // Índice auxiliar para popular a tabela 
         int i = 0;
 
         // Matriz de Object que irá conter os elementos da tabela 
-        Object[][] objetoPadrao = new Object[Estoque.tamanhoDoEstoque()][2];
+        Object[][] objetoPadrao = new Object[estoque.size()][2];
         for(HashMap.Entry<String,Integer> ingrediente : estoque.entrySet()){
+            System.out.println(ingrediente.getKey() + " " + ingrediente.getValue());
             objetoPadrao[i][0] = ingrediente.getKey();
-            objetoPadrao[i][1] = ingrediente.getValue();
+            objetoPadrao[i][1] = String.valueOf(ingrediente.getValue());
             ++i;
         }
+
         // Modelo da tabela, composto dos itens do hashmap, suas quantidades e o título de cada atributo
         DefaultTableModel modeloPadrao = new DefaultTableModel(objetoPadrao, new String[]{"Nome", "Quantidade"}){};
 
-        Object[][] objetoSelecao = new Object[Estoque.tamanhoDoEstoque()][3];
+        Object[][] objetoSelecao = new Object[estoque.size()][3];
         i = 0;
         for(HashMap.Entry<String,Integer> ingrediente : estoque.entrySet()){
             objetoSelecao[i][0] = ingrediente.getKey();
@@ -56,7 +69,8 @@ public class EditarEstoque extends javax.swing.JFrame {
             ++i;
         }
         
-        DefaultTableModel modeloParaSelecao = new DefaultTableModel(objetoSelecao, new String[]{"Nome", "Quantidade", "Disponível"}){
+        // Modelo da tabela, usado para poder deletar itens
+        modeloParaSelecao = new DefaultTableModel(objetoSelecao, new String[]{"Nome", "Quantidade", "Deletar"}){
             @Override
             public Class<?> getColumnClass(int column){
                 if(column == 2){
@@ -65,7 +79,7 @@ public class EditarEstoque extends javax.swing.JFrame {
                 return super.getColumnClass(column);
             }
         };
-        JTable jTable2 = new JTable(modeloParaSelecao){
+        jTable2 = new JTable(modeloParaSelecao){
             @Override
             public TableCellRenderer getCellRenderer(int row, int column) {
                 if (column == 2) {
@@ -91,7 +105,6 @@ public class EditarEstoque extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -114,26 +127,18 @@ public class EditarEstoque extends javax.swing.JFrame {
             }
         });
 
+        BooleanMutavel confirmar = new BooleanMutavel();
         jButton6.setBackground(new java.awt.Color(180, 82, 82));
         jButton6.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Excluir itens");
         jButton6.setBorderPainted(false);
         jButton6.setMargin(new java.awt.Insets(8, 28, 8, 28));
+
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jButton7.setBackground(new java.awt.Color(180, 82, 82));
-        jButton7.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Sair sem salvar");
-        jButton7.setMargin(new java.awt.Insets(8, 28, 8, 28));
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jButton6ActionPerformed(evt, confirmar.getValue(), jTable2.getRowCount());
+                confirmar.mudar();
             }
         });
 
@@ -165,7 +170,6 @@ public class EditarEstoque extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -182,7 +186,6 @@ public class EditarEstoque extends javax.swing.JFrame {
                             .addComponent(jButton5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton7)
                             .addComponent(jButton8)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -191,23 +194,44 @@ public class EditarEstoque extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    // Botão de deletar itens
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt, boolean confirmar, int n) {//GEN-FIRST:event_jButton6ActionPerformed
+        if(!confirmar){
+            jTable2.setModel(modeloParaSelecao);
+            jButton5.setEnabled(false);
+            jButton6.setText("Confirmar");
+            jButton8.setEnabled(false);
+        }else{
+            jButton5.setEnabled(true);
+            jButton6.setText("Excluir itens");
+            jButton8.setEnabled(true);
+            for(int i = 0; i < n; ++i)
+                if((Boolean) jTable2.getValueAt(i,2) == true){
+                    System.out.println((String) jTable2.getValueAt(i, 0));
+                    Estoque.excluirItem((String) jTable2.getValueAt(i,0));
+                }
+            Estoque.carregaEstoque();
+            new EditarEstoque().setVisible(true);
+            dispose();
+        }
+    }
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        System.out.println("hello");
         new AdicionarItemEstoque().setVisible(true);
-        //new NewJPanel().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton7ActionPerformed
-
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        HashMap<String,Integer> novoEstoque = new HashMap<>();
+        for(int i = 0; i < jTable2.getRowCount(); ++i){
+            System.out.println(jTable2.getValueAt(i, 0));
+            novoEstoque.put((String) jTable2.getValueAt(i,0), Integer.parseInt((String) jTable2.getValueAt(i,1)));            
+
+        }
+        Estoque.setEstoque(novoEstoque);
+        Estoque.reescreveEstoque();
+        Estoque.carregaEstoque();
+        dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
@@ -250,11 +274,11 @@ public class EditarEstoque extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JScrollPane jScrollPane2;
-    //private javax.swing.JTable jTable2;
     private javax.swing.JLabel lbCabecalho;
+    private DefaultTableModel modeloParaSelecao;
+    private HashMap<String,Integer> estoque;
     // End of variables declaration//GEN-END:variables
 }
 ////
