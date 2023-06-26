@@ -4,10 +4,20 @@
  */
 package telas;
 
+import java.util.HashMap;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+
+import miqueias_fast_food.Estoque;
+
 /**
  *
  * @author caleb
  */
+ 
 public class EditarEstoque extends javax.swing.JFrame {
 
     /**
@@ -17,41 +27,86 @@ public class EditarEstoque extends javax.swing.JFrame {
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        // Referência do hashmap de estoque
+        HashMap<String, Integer> estoque = Estoque.getEstoque();
+
+        // Índice auxiliar para popular a tabela 
+        int i = 0;
+
+        // Matriz de Object que irá conter os elementos da tabela 
+        Object[][] objetoPadrao = new Object[Estoque.tamanhoDoEstoque()][2];
+        for(HashMap.Entry<String,Integer> ingrediente : estoque.entrySet()){
+            objetoPadrao[i][0] = ingrediente.getKey();
+            objetoPadrao[i][1] = ingrediente.getValue();
+            ++i;
+        }
+        // Modelo da tabela, composto dos itens do hashmap, suas quantidades e o título de cada atributo
+        DefaultTableModel modeloPadrao = new DefaultTableModel(objetoPadrao, new String[]{"Nome", "Quantidade"}){};
+
+        Object[][] objetoSelecao = new Object[Estoque.tamanhoDoEstoque()][3];
+        i = 0;
+        for(HashMap.Entry<String,Integer> ingrediente : estoque.entrySet()){
+            objetoSelecao[i][0] = ingrediente.getKey();
+            objetoSelecao[i][1] = ingrediente.getValue();
+            objetoSelecao[i][2] = false;
+            ++i;
+        }
+        
+        DefaultTableModel modeloParaSelecao = new DefaultTableModel(objetoSelecao, new String[]{"Nome", "Quantidade", "Disponível"}){
+            @Override
+            public Class<?> getColumnClass(int column){
+                if(column == 2){
+                    return Boolean.class;
+                }
+                return super.getColumnClass(column);
+            }
+        };
+        JTable jTable2 = new JTable(modeloParaSelecao){
+            @Override
+            public TableCellRenderer getCellRenderer(int row, int column) {
+                if (column == 2) {
+                    return getDefaultRenderer(Boolean.class); // Use the default Boolean renderer for checkboxes
+                }
+                return super.getCellRenderer(row, column);
+            }
+
+            @Override
+            public TableCellEditor getCellEditor(int row, int column) {
+                if (column == 2) {
+                    return getDefaultEditor(Boolean.class); // Use the default Boolean editor for checkboxes
+                }
+                return super.getCellEditor(row, column);
+            }  
+        };
+
+        jTable2.setModel(modeloPadrao);
+        jTable2.setModel(modeloParaSelecao);
+        jTable2.setModel(modeloPadrao);
+
         lbCabecalho = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(242, 240, 229));
 
         lbCabecalho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cabecalho.png"))); // NOI18N
 
         jTable2.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Nome", "Tipo", "Preço", "Disponibilidade"
-            }
-        ));
+
         jScrollPane2.setViewportView(jTable2);
 
         jButton5.setBackground(new java.awt.Color(180, 82, 82));
         jButton5.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Adicionar item");
+        jButton5.setText("Adicionar itens");
         jButton5.setMargin(new java.awt.Insets(8, 28, 8, 28));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,7 +117,8 @@ public class EditarEstoque extends javax.swing.JFrame {
         jButton6.setBackground(new java.awt.Color(180, 82, 82));
         jButton6.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Edtar/Excluir selecionado");
+        jButton6.setText("Excluir itens");
+        jButton6.setBorderPainted(false);
         jButton6.setMargin(new java.awt.Insets(8, 28, 8, 28));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,11 +196,14 @@ public class EditarEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        System.out.println("hello");
+        new AdicionarItemEstoque().setVisible(true);
+        //new NewJPanel().setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -185,6 +244,7 @@ public class EditarEstoque extends javax.swing.JFrame {
                 new EditarEstoque().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -193,7 +253,8 @@ public class EditarEstoque extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    //private javax.swing.JTable jTable2;
     private javax.swing.JLabel lbCabecalho;
     // End of variables declaration//GEN-END:variables
 }
+////
