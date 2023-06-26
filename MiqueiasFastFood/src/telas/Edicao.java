@@ -18,7 +18,7 @@ public class Edicao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlConfirmarPedido = new javax.swing.JPanel();
+        edicao = new javax.swing.JPanel();
         lbCabecalho = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -28,9 +28,9 @@ public class Edicao extends javax.swing.JFrame {
         setTitle("Miqueias Fast Food - Escolha uma opção");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo_cachorro_quente.png")).getImage());
 
-        pnlConfirmarPedido.setBackground(new java.awt.Color(242, 240, 229));
-        pnlConfirmarPedido.setForeground(new java.awt.Color(255, 255, 255));
-        pnlConfirmarPedido.setToolTipText("");
+        edicao.setBackground(new java.awt.Color(242, 240, 229));
+        edicao.setForeground(new java.awt.Color(255, 255, 255));
+        edicao.setToolTipText("");
 
         lbCabecalho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cabecalho.png"))); // NOI18N
 
@@ -60,28 +60,28 @@ public class Edicao extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(33, 33, 35));
         jLabel1.setText("Bem vindo, escolha uma opção");
 
-        javax.swing.GroupLayout pnlConfirmarPedidoLayout = new javax.swing.GroupLayout(pnlConfirmarPedido);
-        pnlConfirmarPedido.setLayout(pnlConfirmarPedidoLayout);
-        pnlConfirmarPedidoLayout.setHorizontalGroup(
-            pnlConfirmarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlConfirmarPedidoLayout.createSequentialGroup()
+        javax.swing.GroupLayout edicaoLayout = new javax.swing.GroupLayout(edicao);
+        edicao.setLayout(edicaoLayout);
+        edicaoLayout.setHorizontalGroup(
+            edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(edicaoLayout.createSequentialGroup()
                 .addComponent(lbCabecalho)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(pnlConfirmarPedidoLayout.createSequentialGroup()
-                .addGroup(pnlConfirmarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlConfirmarPedidoLayout.createSequentialGroup()
+            .addGroup(edicaoLayout.createSequentialGroup()
+                .addGroup(edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(edicaoLayout.createSequentialGroup()
                         .addGap(269, 269, 269)
-                        .addGroup(pnlConfirmarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(pnlConfirmarPedidoLayout.createSequentialGroup()
+                    .addGroup(edicaoLayout.createSequentialGroup()
                         .addGap(129, 129, 129)
                         .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        pnlConfirmarPedidoLayout.setVerticalGroup(
-            pnlConfirmarPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlConfirmarPedidoLayout.createSequentialGroup()
+        edicaoLayout.setVerticalGroup(
+            edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(edicaoLayout.createSequentialGroup()
                 .addComponent(lbCabecalho)
                 .addGap(65, 65, 65)
                 .addComponent(jLabel1)
@@ -98,12 +98,12 @@ public class Edicao extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlConfirmarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(edicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(pnlConfirmarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(edicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -138,20 +138,20 @@ public class Edicao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConfirmarPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Edicao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConfirmarPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Edicao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConfirmarPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Edicao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConfirmarPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Edicao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConfirmarPedido().setVisible(true);
+                new Edicao().setVisible(true);
             }
         });
     }
@@ -161,6 +161,6 @@ public class Edicao extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbCabecalho;
-    private javax.swing.JPanel pnlConfirmarPedido;
+    private javax.swing.JPanel edicao;
     // End of variables declaration//GEN-END:variables
 }
