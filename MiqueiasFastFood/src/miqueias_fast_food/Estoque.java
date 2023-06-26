@@ -30,6 +30,9 @@ public class Estoque{
             BufferedReader leitor = new BufferedReader(new FileReader(DIRETORIO_ESTOQUE));
             
             // Cada linha vista no arquivo é salva em uma String 
+            ingredientes.clear();
+            indiceDosIngredientes.clear();
+            numeroDeLinhas = 1;
             String linha;
             while((linha = leitor.readLine()) != null){
                 
@@ -47,6 +50,30 @@ public class Estoque{
             // Fecha o leitor depois de ler todas as linhas
             leitor.close();
         }catch(IOException e){
+            // Ignora a exceção
+        }
+    }
+
+    // Método para reescrever do zero o arquivo quando ele algum item
+    // é editado no estoque
+    public static void reescreveEstoque(){
+        try {
+
+            // Leia o arquivo e guarde cada uma das linhas num array exceto a linha 
+            // que possui o índice da linha que queremos deletar
+
+            BufferedWriter escritor = new BufferedWriter(new FileWriter(DIRETORIO_ESTOQUE, false));
+
+            for (HashMap.Entry<String,Integer> linha : ingredientes.entrySet()) {
+                escritor.write(String.format("%s;%d",linha.getKey() , linha.getValue()));
+                escritor.newLine();
+            }
+            
+            // Fecha o escritor
+            escritor.close();
+
+
+        } catch (IOException e) {
             // Ignora a exceção
         }
     }
@@ -144,8 +171,10 @@ public class Estoque{
 
             while ((linha = leitor.readLine()) != null) {
                 // Se a linha atual não é a linha que queremos deletar, adiciona ela ao array de linhas
-                if(indiceDeLinha != indiceDosIngredientes.get(nomeDoItem) - 1)
+                if(indiceDeLinha != indiceDosIngredientes.get(nomeDoItem) - 1){
+                    System.out.println(linha);
                     linhas[indiceDeLinha++] = linha;
+                }
                 else 
                     ++indiceDeLinha;
             }
@@ -157,7 +186,7 @@ public class Estoque{
             BufferedWriter escritor = new BufferedWriter(new FileWriter(arquivo, false));
             for (String linhaAtualizada : linhas) {
                 // Compensa para a linha vazia que estará  no array
-                if(linha != ""){
+                if(linhaAtualizada != null){
                     escritor.write(linhaAtualizada);
                     escritor.newLine();
                 }
@@ -170,16 +199,15 @@ public class Estoque{
             escritor.close();
 
         } catch (IOException e) {
-
             // Ignora a exceção
         }
     }
 
-    public static int tamanhoDoEstoque(){
-        return (numeroDeLinhas - 1);
-    }
-    
     public static HashMap<String, Integer> getEstoque(){
         return Estoque.ingredientes;
+    }
+
+    public static void setEstoque(HashMap<String,Integer> estoque){
+        ingredientes = new HashMap<>(estoque);
     }
 }

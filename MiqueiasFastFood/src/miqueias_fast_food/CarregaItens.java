@@ -7,10 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.HashMap;
 
 /*
  * @author guilherme
- * Classe responsável pela leitura, salvamento e criação de objetos Item de um arquivo .txt
+ * Classe responsável pela leitura dos objetos Item de um arquivo .txt
  */
 public class CarregaItens {
     // ArrayList onde ficará armazenado os itens lidos do arquivo .txt
@@ -31,6 +32,11 @@ public class CarregaItens {
     
     // método que lê do arquivo "Itens.txt" e cria os objetos Itens armazenados nele
     public static void carregarItens() {
+        
+        // É copiado o estoque para poder saber se um item pode ser adicionado a lista do cardápio
+        
+        HashMap<String,Integer> estoque = new HashMap<>(Estoque.getEstoque());
+
         itens = new ArrayList<>();
         try{
             BufferedReader leitor;
@@ -91,37 +97,15 @@ public class CarregaItens {
                 // criação do objeto Item
                 Item item = new Item(nome, preco, v_n, t_c, descricao);
                 
-                // adiciona o item criado à ArrayList
-                itens.add(item);
+                // adiciona o item criado à ArrayList se, e somente se, sua quantidade for maior que 0
+                // no Estoque
+                if(estoque.get(item.getNome()) > 0)
+                    itens.add(item);
             }
             
-            // fecha o arquivo
+            // fecha o leitor do arquivo
             leitor.close();
         } catch (IOException | NumberFormatException ignException) {
-            // ignora a excecao
-        }
-    }
-    
-    // método que salva no arquivo "Itens.txt" objetos Item
-    public static void salvarItens(ArrayList<Item> itens_para_salvar){
-        try{
-            BufferedWriter escritor;
-            
-            // cria o escritor de arquivos
-            escritor = new BufferedWriter(new FileWriter(DIRETORIO));
-            for(Item item : itens_para_salvar) {
-                String linha = String.format("%s;%.2f;%.1f;%.1f;%.1f;%.1f;%s\n", 
-                        item.getNome(), item.getPreco(), item.getValoresNutriciais()[0],
-                        item.getValoresNutriciais()[1], item.getValoresNutriciais()[2],
-                        item.getValoresNutriciais()[3], item.getTipo());
-                
-                // esqueve no arquivo os atributos do objeto Item formatados
-                escritor.write(linha);
-            }
-            
-            // fecha o arquivo
-            escritor.close();
-        } catch (IOException ignException) {
             // ignora a excecao
         }
     }
