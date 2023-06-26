@@ -4,25 +4,31 @@
  */
 package telas;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import miqueias_fast_food.CarregarFuncionario;
+import miqueias_fast_food.CarregaItens;
 import miqueias_fast_food.Funcionario;
+import miqueias_fast_food.Item;
+import miqueias_fast_food.Pedido;
+import miqueias_fast_food.CarregarFuncionario;
 
 /**
  *
  * @author Guilherme
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-    public static ArrayList<Funcionario> funcionarios;
-    /**
-     * Creates new form MenuPrincipal
-     */
+    static LocalDate data_atual = java.time.LocalDate.now();
+    static final ArrayList<Pedido> pedidos_do_dia = new ArrayList<>();
+    static ArrayList<Item> cardapio;
+    static ArrayList<Funcionario> funcionarios;
+    
     public MenuPrincipal() {
-        CarregarFuncionario.FetchWorkers();
-        funcionarios = CarregarFuncionario.getTabelaFuncionarios();
         initComponents();
         
-        
+        CarregarFuncionario.FetchWorkers();
+        CarregaItens.carregarItens();
+        cardapio = CarregaItens.getItens();
+        funcionarios = CarregarFuncionario.getTabelaFuncionarios();
     }
 
     /**
@@ -39,7 +45,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         bCliente = new javax.swing.JButton();
         bFuncionario = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Miqueias Fast Food - Menu Principal");
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo_cachorro_quente.png")).getImage());
 
@@ -112,7 +118,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void bFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFuncionarioActionPerformed
         // TODO add your handling code here:
-        
         new LoginFun().setVisible(true);
     }//GEN-LAST:event_bFuncionarioActionPerformed
 
