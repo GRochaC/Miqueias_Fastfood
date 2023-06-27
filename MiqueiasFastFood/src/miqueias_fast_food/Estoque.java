@@ -126,8 +126,9 @@ public class Estoque{
             int indiceDeLinha = 0;
 
             while ((linha = leitor.readLine()) != null) {
+                String[] conteuDoDaLinha = linha.split(";");
                 // Se a linha atual não é a linha que queremos deletar, adiciona ela ao array de linhas
-                if(indiceDeLinha != indiceDosIngredientes.get(nomeDoItem) - 1){
+                if(!(conteuDoDaLinha[0].equals(nomeDoItem))){
                     linhas[indiceDeLinha++] = linha;
                 }
                 else 

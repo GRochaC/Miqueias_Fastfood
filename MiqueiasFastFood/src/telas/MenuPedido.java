@@ -5,6 +5,7 @@
 package telas;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +18,7 @@ import miqueias_fast_food.*;
 public class MenuPedido extends javax.swing.JFrame {
     static Pedido pedido;
     static Cliente cliente;
-    
+
     public MenuPedido() {
         initComponents();
         
@@ -63,6 +64,8 @@ public class MenuPedido extends javax.swing.JFrame {
     }
     
     private void carregarMenu(int tipo){
+        estoque = Estoque.getEstoque();
+
         DefaultTableModel tabela = new DefaultTableModel(new Object[] {"Nome", "Tipo", "Preço"},0);
         
         switch(tipo) {
@@ -547,16 +550,16 @@ public class MenuPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddActionPerformed
-        // TODO add your handling code here:
         if(tbMenu.getSelectedRow() >= 0) {
             int linha_item = tbMenu.getSelectedRow();
             String nome = tbMenu.getValueAt(linha_item, 0).toString();
             for(Item i : MenuPrincipal.cardapio) {
                 if(i.getNome().equals(nome)) {
-                    pedido.addItem(i, 1);
-                    atualizarItem(i);
-                    atualizarListaPedido();
-                    atualizarValorTotal();
+                    if(pedido.addItem(i, 1)){
+                        atualizarItem(i);
+                        atualizarListaPedido();
+                        atualizarValorTotal();
+                    }
                     return;
                 }
             }
@@ -753,5 +756,6 @@ public class MenuPedido extends javax.swing.JFrame {
     private javax.swing.JTextPane txtpNomeItem;
     private javax.swing.JTextPane txtpPrecoItem;
     private javax.swing.JTextPane txtpTipoItem;
+    private HashMap<String,Integer> estoque;
     // End of variables declaration//GEN-END:variables
 }

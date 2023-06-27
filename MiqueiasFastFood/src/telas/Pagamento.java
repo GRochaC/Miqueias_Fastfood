@@ -6,16 +6,19 @@ package telas;
 
 import java.util.InputMismatchException;
 import javax.swing.JOptionPane;
+import java.util.HashMap;
 import miqueias_fast_food.*;
 /**
  *
  * @author Guilherme
  */
+
 public class Pagamento extends javax.swing.JFrame {
     static Cliente cliente;
     static Pedido pedido;
     private boolean nome = false, cpf = false, telefone = false, pagamento = false,
             dia = false, mes = false, ano = false;
+    private HashMap<String,Integer> estoque = Estoque.getEstoque();
     
     public Pagamento() {
         initComponents();
@@ -426,6 +429,15 @@ public class Pagamento extends javax.swing.JFrame {
         MenuPrincipal.pedidos_do_dia.add(pedido);
         HistoricoDePedidos.escreverNoArquivo(pedido);
         HistoricoDePedidos.gerarRelatorio(pedido);
+        
+        for(ItemPedido itemPedido : pedido.getItensPedidos()){
+            estoque.put(itemPedido.getItem().getNome(), estoque.get(itemPedido.getItem().getNome()) - itemPedido.getQuantidade());
+        }
+        Estoque.setEstoque(estoque);
+        Estoque.reescreveEstoque();
+        Estoque.carregaEstoque();
+        CarregaItens.carregarItens();
+        MenuPrincipal.cardapio = CarregaItens.getItens();
         
         JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso!", "Pagamento realizado", 
                 JOptionPane.DEFAULT_OPTION);

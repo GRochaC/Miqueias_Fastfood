@@ -4,8 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-import telas.MenuPrincipal;
-
 import java.util.HashMap;
 
 /*
@@ -141,8 +139,6 @@ public abstract class CarregaItens {
             // Insere item no arquivo
             BufferedWriter escritor = new BufferedWriter(new FileWriter(DIRETORIO, true));
             escritor.write(String.format("%s;%.2f;%.1f;%.1f;%.1f;%.1f;%s", nome, preco,
-            valoresNutricionais[0], valoresNutricionais[1], valoresNutricionais[2], valoresNutricionais[3], tipo));
-            System.out.println(String.format("%s;%.2f;%.1f;%.1f;%.1f;%.1f;%s", nome, preco,
             valoresNutricionais[0], valoresNutricionais[1], valoresNutricionais[2], valoresNutricionais[3], tipo));
             escritor.newLine();
             

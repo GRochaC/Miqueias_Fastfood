@@ -21,7 +21,7 @@ import miqueias_fast_food.Estoque;
  */
  
 public class EditarEstoque extends javax.swing.JFrame implements BooleanMutavel{
-    boolean confirmar = false;
+    private boolean confirmar = false;
     public void mudar(){
         confirmar = !confirmar;
     }

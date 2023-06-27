@@ -1,6 +1,7 @@
 package miqueias_fast_food;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author guilherme
@@ -21,6 +22,9 @@ public class Pedido {
     
     // preço total do pedido
     private double total;
+    
+    // Referência ao estoque para se verificar que se pode adicionar um item ao pedido
+    private HashMap<String,Integer> estoque = Estoque.getEstoque();
     
     // lista de itens pedidos que compõem o pedido
     private final ArrayList<ItemPedido> itensPedidos;
@@ -91,6 +95,11 @@ public class Pedido {
             ItemPedido ip_atual = itensPedidos.get(i);
             // se já houver o item no pedido:
             if(ip_atual.getItem().equals(item)) {
+                
+                // Se ele tentar pegar mais itens do que há no estoque
+                if(quantidade + ip_atual.getQuantidade() > estoque.get(item.getNome()))
+                    return false;
+                
                 ip_atual.setQuantidade(quantidade + ip_atual.getQuantidade());
                 return true;
             }

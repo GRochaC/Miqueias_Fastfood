@@ -138,7 +138,7 @@ public class AdicionarItemCardapio extends javax.swing.JFrame {
             Float.parseFloat((String) jTable1.getValueAt(0, 4)), Float.parseFloat((String) jTable1.getValueAt(0, 5))}; 
         String tipo = (String) jTable1.getValueAt(0, 6); 
         CarregaItens.adicionarItem(nome, preco, valorCalorico, tipo);                                    
-        CarregaItens.reescreveCardapio();
+        //CarregaItens.reescreveCardapio();
         CarregaItens.carregarItens();
         new EditarCardapio().setVisible(true);
         dispose();
