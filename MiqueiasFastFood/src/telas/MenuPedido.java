@@ -549,11 +549,17 @@ public class MenuPedido extends javax.swing.JFrame {
     private void bAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddActionPerformed
         // TODO add your handling code here:
         if(tbMenu.getSelectedRow() >= 0) {
-            Item i_add = MenuPrincipal.cardapio.get(tbMenu.getSelectedRow());
-            pedido.addItem(i_add, 1);
-            atualizarItem(i_add);
-            atualizarListaPedido();
-            atualizarValorTotal();
+            int linha_item = tbMenu.getSelectedRow();
+            String nome = tbMenu.getValueAt(linha_item, 0).toString();
+            for(Item i : MenuPrincipal.cardapio) {
+                if(i.getNome().equals(nome)) {
+                    pedido.addItem(i, 1);
+                    atualizarItem(i);
+                    atualizarListaPedido();
+                    atualizarValorTotal();
+                    return;
+                }
+            }
         }
     }//GEN-LAST:event_bAddActionPerformed
 
@@ -591,7 +597,13 @@ public class MenuPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             int linha_item = tbMenu.getSelectedRow();
-            carregarInfoItem(MenuPrincipal.cardapio.get(linha_item));
+            String nome = tbMenu.getValueAt(linha_item, 0).toString();
+            for(Item i : MenuPrincipal.cardapio) {
+                if(i.getNome().equals(nome)) {
+                    carregarInfoItem(i);
+                    return;
+                }
+            }
         } catch (IndexOutOfBoundsException ignException){ }
     }//GEN-LAST:event_tbMenuMouseClicked
 
@@ -619,6 +631,16 @@ public class MenuPedido extends javax.swing.JFrame {
         Object[] opcoes = {"Próximo", "Cancelar"};
         if(tbMenu.getSelectedRow() >= 0) {
             Item i_selec = MenuPrincipal.cardapio.get(tbMenu.getSelectedRow());
+            
+            int linha_item = tbMenu.getSelectedRow();
+            String nome = tbMenu.getValueAt(linha_item, 0).toString();
+            for(Item i : MenuPrincipal.cardapio) {
+                if(i.getNome().equals(nome)) {
+                    i_selec = i;
+                    break;
+                }
+            }
+            
             float[] v_n = i_selec.getValoresNutriciais();
             String[] v_n_f = {String.format("Calorias: %.1fkcal", v_n[0]),
                               String.format("Gordura total: %.1fg", v_n[1]),
@@ -640,11 +662,19 @@ public class MenuPedido extends javax.swing.JFrame {
     private void bDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDelActionPerformed
         // TODO add your handling code here:
         if(tbMenu.getSelectedRow() >= 0) {
-            Item i_del = MenuPrincipal.cardapio.get(tbMenu.getSelectedRow());
-            pedido.delItem(i_del, 1);
-            atualizarItem(i_del);
-            atualizarListaPedido();
-            atualizarValorTotal();
+            int linha_item = tbMenu.getSelectedRow();
+            String nome = tbMenu.getValueAt(linha_item, 0).toString();
+            for(Item i : MenuPrincipal.cardapio) {
+                if(i.getNome().equals(nome)) {
+                    pedido.delItem(i, 1);
+                    atualizarItem(i);
+                    atualizarListaPedido();
+                    atualizarValorTotal();
+                    
+                    return;
+                }
+            }
+            
         }
     }//GEN-LAST:event_bDelActionPerformed
 
@@ -673,6 +703,9 @@ public class MenuPedido extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MenuPedido.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
