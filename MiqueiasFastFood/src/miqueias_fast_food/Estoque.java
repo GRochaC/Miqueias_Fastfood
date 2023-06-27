@@ -54,7 +54,7 @@ public class Estoque{
         }
     }
 
-    // Método para reescrever do zero o arquivo quando ele algum item
+    // Método para reescrever do zero o arquivo quando algum item
     // é editado no estoque
     public static void reescreveEstoque(){
         try {
@@ -108,50 +108,6 @@ public class Estoque{
         return true;
     }
 
-    // Método para editar a quantidade disponível de um item
-    public static void editarItem(String nomeDoItem, int novaQuantidade){
-        try {
-            // Leia o arquivo 
-            File arquivo = new File(DIRETORIO_ESTOQUE);
-            BufferedReader leitor = new BufferedReader(new FileReader(arquivo));
-
-            // Usaremos um array de strings onde cada item será uma das linhas do arquivo
-            String[] linhas = new String[numeroDeLinhas-1];
-            
-            // Variáveis auxiliares para a população do array
-            String linha;
-            int indiceDeLinha = 0;
-            
-            // População do array
-            while ((linha = leitor.readLine()) != null) {
-                linhas[indiceDeLinha++] = linha;
-            }
-            
-            // Fecha o leitor quando se terminar de ler arquivo
-            leitor.close();
-
-            // Modifica no array de linhas a linha que desejamos editar, usando como auxílio 
-            // o HashMap que usamos para guardar a linha no arquivo de cada item 
-            linhas[indiceDosIngredientes.get(nomeDoItem) - 1] = String.format("%s;%d", nomeDoItem, novaQuantidade);
-
-            // Reescreve o arquivo
-            BufferedWriter escritor = new BufferedWriter(new FileWriter(arquivo, false));
-            for (String linhaAtualizada : linhas) {
-                if(linhaAtualizada != ""){
-                    escritor.write(linhaAtualizada);
-                    escritor.newLine();
-                }
-            }
-
-            // Fecha o escritor 
-            escritor.close();
-        } catch (IOException e) {
-
-            // Caso haja algum erro na escrita do arquivo, se mostra o erro
-            e.printStackTrace();
-        }
-    }
-
     public static void excluirItem(String nomeDoItem){
         try {
 
@@ -172,7 +128,6 @@ public class Estoque{
             while ((linha = leitor.readLine()) != null) {
                 // Se a linha atual não é a linha que queremos deletar, adiciona ela ao array de linhas
                 if(indiceDeLinha != indiceDosIngredientes.get(nomeDoItem) - 1){
-                    System.out.println(linha);
                     linhas[indiceDeLinha++] = linha;
                 }
                 else 
