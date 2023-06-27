@@ -12,6 +12,7 @@ import miqueias_fast_food.Item;
 import miqueias_fast_food.Pedido;
 import miqueias_fast_food.CarregarFuncionario;
 import miqueias_fast_food.Estoque;
+import miqueias_fast_food.Mesas;
 
 /**
  *
@@ -31,6 +32,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         CarregaItens.carregarItens();
         cardapio = CarregaItens.getItens();
         funcionarios = CarregarFuncionario.getTabelaFuncionarios();
+        Mesas.gerarMesas();
     }
 
     /**
