@@ -116,7 +116,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bEdiçãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEdiçãoActionPerformed
-        // TODO add your handling code here:
+        new Edicao().setVisible(true);
     }//GEN-LAST:event_bEdiçãoActionPerformed
 
     private void bFuncionarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFuncionarios1ActionPerformed

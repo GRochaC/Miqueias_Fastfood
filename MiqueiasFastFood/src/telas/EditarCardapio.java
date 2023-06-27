@@ -1,24 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package telas;
+import miqueias_fast_food.BooleanMutavel;
+import miqueias_fast_food.CarregaItens;
+
+import javax.swing.table.DefaultTableModel;
+import miqueias_fast_food.Item;
+import miqueias_fast_food.ItemParaEdicao;
+
+import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 
 /**
- *
  * @author caleb
  */
-public class EditarCardapio extends javax.swing.JFrame {
 
-    /**
-     * Creates new form EditarCardapio
-     */
+
+public class EditarCardapio extends javax.swing.JFrame implements BooleanMutavel{
+    // ArrayList auxiliar
+    private ArrayList<Item> itens = MenuPrincipal.cardapio;
+
+    private boolean confirmar = false;
+    public void mudar(){
+        confirmar = !confirmar;
+    }
+
+
     public EditarCardapio() {
         initComponents();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        CarregaItens.carregarItens();
+        itens = CarregaItens.getItens();
 
         lbCabecalho = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -32,19 +48,77 @@ public class EditarCardapio extends javax.swing.JFrame {
         setBackground(new java.awt.Color(242, 240, 229));
 
         lbCabecalho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cabecalho.png"))); // NOI18N
+        
+
+        // Índice auxiliar para popular a tabela 
+        int i = 0;
+        
+        // Matriz de Object que irá conter os elementos da tabela 
+        Object[][] objetoPadrao = new Object[itens.size()][1];
+        for(Item item : itens){
+            objetoPadrao[i][0] = item.getNome();
+            ++i;
+        }
+        
+        // Matriz de Object que irá conter os elementos da tabela que são selecionáveis para deleção
+        Object[][] objetoSelecao = new Object[itens.size()][2];
+        i = 0;
+        for(Item item : itens){
+            objetoSelecao[i][0] = item.getNome();
+            objetoSelecao[i][1] = false;
+            ++i;
+        }
+        
+        // Modelo da tabela, usado para poder deletar itens
+        modeloParaSelecao = new DefaultTableModel(objetoSelecao, new String[]{"Nome", "Deletar"}){
+            @Override
+            public Class<?> getColumnClass(int column){
+                if(column == 1){
+                    return Boolean.class;
+                }
+                return super.getColumnClass(column);
+            }
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Make all cells non-editable
+            }
+        };
+
+        jTable2 = new JTable(modeloParaSelecao){
+            @Override
+            public TableCellRenderer getCellRenderer(int row, int column) {
+                if (column == 1) {
+                    return getDefaultRenderer(Boolean.class); // Use the default Boolean renderer for checkboxes
+                }
+                return super.getCellRenderer(row, column);
+            }
+
+            @Override
+            public TableCellEditor getCellEditor(int row, int column) {
+                if (column == 1) {
+                    return getDefaultEditor(Boolean.class); // Use the default Boolean editor for checkboxes
+                }
+                return super.getCellEditor(row, column);
+            }  
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                if(column == 0)
+                    return false; 
+                return true;
+            }
+        };
+        
+        // Modelo da tabela, composto de nomes dos itens
+        DefaultTableModel modeloPadrao = new DefaultTableModel(objetoPadrao, new String[]{"Nome"}){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Make all cells non-editable
+            }
+        };
+        jTable2.setModel(modeloPadrao);
 
         jTable2.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Nome", "Tipo", "Preço", "Disponibilidade"
-            }
-        ));
+
         jScrollPane2.setViewportView(jTable2);
 
         jButton5.setBackground(new java.awt.Color(180, 82, 82));
@@ -61,18 +135,19 @@ public class EditarCardapio extends javax.swing.JFrame {
         jButton6.setBackground(new java.awt.Color(180, 82, 82));
         jButton6.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Excluir selecionado");
+        jButton6.setText("Excluir itens");
         jButton6.setMargin(new java.awt.Insets(8, 28, 8, 28));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
+                mudar();
             }
         });
 
         jButton7.setBackground(new java.awt.Color(180, 82, 82));
         jButton7.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Sair sem salvar");
+        jButton7.setText("Adicionar item");
         jButton7.setMargin(new java.awt.Insets(8, 28, 8, 28));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,19 +208,43 @@ public class EditarCardapio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        if(!confirmar){
+            jTable2.setModel(modeloParaSelecao);
+            jButton5.setEnabled(false);
+            jButton6.setText("Confirmar");
+            jButton7.setEnabled(false);
+            jButton8.setEnabled(false);
+        }else{
+            jButton5.setEnabled(true);
+            jButton6.setText("Excluir itens");
+            jButton7.setEnabled(true);
+            jButton8.setEnabled(true);
+            for(int i = 0; i < jTable2.getRowCount(); ++i)
+                if((Boolean) jTable2.getValueAt(i,1) == true){
+                    System.out.println("Deletado com sucesso");
+                    CarregaItens.excluirItem((String) jTable2.getValueAt(i,0));
+                }
+            CarregaItens.carregarItens();
+            MenuPrincipal.cardapio = CarregaItens.getItens();
+            new EditarCardapio().setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        ItemParaEdicao.setItem(itens.get(jTable2.getSelectedRow()));
+        ItemParaEdicao.setIndice(jTable2.getSelectedRow());
+        new EditarItemCardapio().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        new AdicionarItemCardapio().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
@@ -191,5 +290,6 @@ public class EditarCardapio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     private javax.swing.JLabel lbCabecalho;
+    private DefaultTableModel modeloParaSelecao;
     // End of variables declaration//GEN-END:variables
 }

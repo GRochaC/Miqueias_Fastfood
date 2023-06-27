@@ -11,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
+import miqueias_fast_food.BooleanMutavel;
+import miqueias_fast_food.CarregaItens;
 import miqueias_fast_food.Estoque;
 
 /**
@@ -18,27 +20,17 @@ import miqueias_fast_food.Estoque;
  * @author caleb
  */
  
-class BooleanMutavel{
+public class EditarEstoque extends javax.swing.JFrame implements BooleanMutavel{
     boolean confirmar = false;
     public void mudar(){
         confirmar = !confirmar;
     }
-    public boolean getValue(){
-        return this.confirmar;
-    }
-}
-
-public class EditarEstoque extends javax.swing.JFrame {
     JTable jTable2;
-    /**
-     * Creates new form EditarCardapio
-     */
+
     public EditarEstoque() {
         initComponents();
     }
 
-    //@SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         Estoque.carregaEstoque();
 
@@ -51,7 +43,6 @@ public class EditarEstoque extends javax.swing.JFrame {
         // Matriz de Object que irá conter os elementos da tabela 
         Object[][] objetoPadrao = new Object[estoque.size()][2];
         for(HashMap.Entry<String,Integer> ingrediente : estoque.entrySet()){
-            System.out.println(ingrediente.getKey() + " " + ingrediente.getValue());
             objetoPadrao[i][0] = ingrediente.getKey();
             objetoPadrao[i][1] = String.valueOf(ingrediente.getValue());
             ++i;
@@ -60,6 +51,7 @@ public class EditarEstoque extends javax.swing.JFrame {
         // Modelo da tabela, composto dos itens do hashmap, suas quantidades e o título de cada atributo
         DefaultTableModel modeloPadrao = new DefaultTableModel(objetoPadrao, new String[]{"Nome", "Quantidade"}){};
 
+        // Matriz de Object que irá conter os elementos da tabela que são selecionáveis para deleção
         Object[][] objetoSelecao = new Object[estoque.size()][3];
         i = 0;
         for(HashMap.Entry<String,Integer> ingrediente : estoque.entrySet()){
@@ -98,8 +90,6 @@ public class EditarEstoque extends javax.swing.JFrame {
         };
 
         jTable2.setModel(modeloPadrao);
-        jTable2.setModel(modeloParaSelecao);
-        jTable2.setModel(modeloPadrao);
 
         lbCabecalho = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -127,7 +117,6 @@ public class EditarEstoque extends javax.swing.JFrame {
             }
         });
 
-        BooleanMutavel confirmar = new BooleanMutavel();
         jButton6.setBackground(new java.awt.Color(180, 82, 82));
         jButton6.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,8 +126,8 @@ public class EditarEstoque extends javax.swing.JFrame {
 
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt, confirmar.getValue(), jTable2.getRowCount());
-                confirmar.mudar();
+                jButton6ActionPerformed(evt, confirmar, jTable2.getRowCount());
+                mudar();
             }
         });
 
@@ -207,7 +196,6 @@ public class EditarEstoque extends javax.swing.JFrame {
             jButton8.setEnabled(true);
             for(int i = 0; i < n; ++i)
                 if((Boolean) jTable2.getValueAt(i,2) == true){
-                    System.out.println((String) jTable2.getValueAt(i, 0));
                     Estoque.excluirItem((String) jTable2.getValueAt(i,0));
                 }
             Estoque.carregaEstoque();
@@ -224,13 +212,12 @@ public class EditarEstoque extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         HashMap<String,Integer> novoEstoque = new HashMap<>();
         for(int i = 0; i < jTable2.getRowCount(); ++i){
-            System.out.println(jTable2.getValueAt(i, 0));
             novoEstoque.put((String) jTable2.getValueAt(i,0), Integer.parseInt((String) jTable2.getValueAt(i,1)));            
-
         }
         Estoque.setEstoque(novoEstoque);
         Estoque.reescreveEstoque();
         Estoque.carregaEstoque();
+        CarregaItens.carregarItens();
         dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 

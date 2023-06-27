@@ -24,6 +24,7 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
     public CadastrarEditarFuncionarios() {
         
         initComponents();
+        setLocationRelativeTo(null);
         popularTabela();
         bCadastrar.setEnabled(true);
         bSalvar.setEnabled(false);
@@ -69,7 +70,7 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
         scrPnlFuncionarios = new javax.swing.JScrollPane();
         tbFuncionarios = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lbCabecalho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cabecalho.png"))); // NOI18N
 
