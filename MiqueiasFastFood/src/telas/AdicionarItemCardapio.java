@@ -16,6 +16,8 @@ public class AdicionarItemCardapio extends javax.swing.JFrame {
      */
     public AdicionarItemCardapio() {
         initComponents();
+        
+        setLocationRelativeTo(null);
     }
 
     /**

@@ -135,6 +135,8 @@ public class TelaCliente extends javax.swing.JFrame {
 
     private void bComerAquiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bComerAquiActionPerformed
         // TODO add your handling code here:
+        SelecaoMesas.cliente = cliente;
+        new SelecaoMesas().setVisible(true);
     }//GEN-LAST:event_bComerAquiActionPerformed
 
     /**

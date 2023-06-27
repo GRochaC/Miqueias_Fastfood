@@ -10,6 +10,8 @@ public class AdicionarItemEstoque extends javax.swing.JFrame {
 
     public AdicionarItemEstoque() {
         initComponents();
+        
+        setLocationRelativeTo(null);
     }
 
     private void initComponents() {

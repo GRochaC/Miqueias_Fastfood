@@ -71,6 +71,7 @@ public class CadastrarEditarFuncionarios extends javax.swing.JFrame {
         tbFuncionarios = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Miqueias Fast Food - Cadastro e Edição de Funcionários");
 
         lbCabecalho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cabecalho.png"))); // NOI18N
 

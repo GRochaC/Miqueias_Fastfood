@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package telas;
-import miqueias_fast_food.Funcionario;
 /**
  *
  * @author archago
@@ -15,6 +14,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
     public TelaFuncionario() {
         initComponents();
         lbBemVindo.setText("Bem-vindo, " + LoginFun.logged.getNome());
+        setLocationRelativeTo(null);
     }
 
 
@@ -35,6 +35,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
         bSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Miqueias Fast Food - Tela do Funcionário");
 
         pnlTelaFuncionario.setBackground(new java.awt.Color(244, 244, 244));
 
@@ -125,7 +126,9 @@ public class TelaFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_bFuncionarios1ActionPerformed
 
     private void bSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSairActionPerformed
+        // TODO add your handling code here:
         new LoginFun().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_bSairActionPerformed
 
     /**
