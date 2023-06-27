@@ -9,8 +9,8 @@ public class HistoricoDePedidos{
     // Usamos o LocalDate para adquirirmos a data do dia atual
     static private LocalDate data;
 
-    // ArrayList para armazenarmos os pedidos feitos no dia atual
-    static private ArrayList<Pedido> pedidos;
+    // Atributo para se adicionar um identificador a cada pedido do dia
+    static private int indiceDoPedido = 0;
 
     // Arquivo que mantém o registro de todos os pedidos feitos
     static final String DIRETORIO_HISTORICO = "historico.txt";
@@ -19,19 +19,12 @@ public class HistoricoDePedidos{
     // E cada um será guardado numa pasta chamada relatorios
     static final String DIRETORIO_RELATORIO = "relatorios/" + LocalDate.now() + ".txt";
 
-
-    // Método para adicionarmos ao nosso armazenador de pedidos um novo pedido feito
-    public static void adicionarPedido(Pedido pedido){
-        pedidos.add(pedido);
-    }
-
     // Ao final do dia, chamamos este método, que adiciona ao arquivo histórico cada 
     // pedido que temos armazenado no nosso ArrayList
-    public static void gerarArquivo(){
+    public static void escreverNoArquivo(Pedido pedido){
         try {
             data = LocalDate.now();
-            BufferedWriter escritor = new BufferedWriter(new FileWriter(DIRETORIO_HISTORICO));
-
+            BufferedWriter escritor = new BufferedWriter(new FileWriter(DIRETORIO_HISTORICO, true));
            
             /*
              * O histórico está no formato:
@@ -42,52 +35,45 @@ public class HistoricoDePedidos{
              * Onde cada linha representa um pedido feito
              */
 
-            for(Pedido pedido : pedidos){
-                escritor.write(data + " - R$" + pedido.getTotal());
-                escritor.newLine();
-            }
+            escritor.write(data + " - R$" + pedido.getTotal());
+            escritor.newLine();
 
-            // Uma quebra de linha é feita no final por organização e o escritor 
-            // é fechado
+            // Uma quebra de linha é feita no final por organização e o escritor é fechado
             escritor.newLine();
             escritor.close();
         } catch (IOException e) {
             
-            // Se houver algum erro na leitura, mostrar o erro.
+            // Se houver algum erro na escrita, mostre o erro.
             e.printStackTrace();
         }
     }
 
     // Método para criar um arquivo detalhando exatamente os pedidos feitos no dia
-    public static void gerarRelatorio(){
+    public static void gerarRelatorio(Pedido pedido){
         try {
 
-            FileWriter escritor = new FileWriter(DIRETORIO_RELATORIO);
+            FileWriter escritor = new FileWriter(DIRETORIO_RELATORIO, true);
 
             // Variável auxiliar para termos o identificador do pedido
-            int indiceDoPedido = 0;
 
-            for(Pedido pedido : pedidos){
-                
-                // ArrayList de cada item pedido no pedido
-                ArrayList<ItemPedido> itensPedidos = pedido.getItensPedidos();
+            // ArrayList de cada item pedido no pedido
+            ArrayList<ItemPedido> itensPedidos = pedido.getItensPedidos();
 
-                /* 
-                 * O formato será:
-                 * Pedido i (R$xx.xx)
-                 * - qtd(x) x(s) 
-                 * - qtd(y) y(s)
-                 */
-                
-                escritor.write("Pedido " + indiceDoPedido + ": R$" + pedido.getTotal() + '\n');
-                for(ItemPedido item : itensPedidos){
-                    escritor.write("- " + item.getQuantidade() + ' ' + item.getItem() + "(s)\n");
-                }
-                ++indiceDoPedido;
-
-                // Quebra de linha no fim de cada pedido por organização
-                escritor.write('\n');
+            /* 
+             * O formato será:
+             * Pedido i (R$xx.xx)
+             * - qtd(x) x(s) 
+             * - qtd(y) y(s)
+             */
+            
+            escritor.write("Pedido " + indiceDoPedido + ": R$" + pedido.getTotal() + '\n');
+            for(ItemPedido item : itensPedidos){
+                escritor.write("- " + item.getQuantidade() + ' ' + item.getItem() + "(s)\n");
             }
+            ++indiceDoPedido;
+
+            // Quebra de linha no fim de cada pedido por organização
+            escritor.write('\n');
 
             // Fecha o escritor
             escritor.close();
